@@ -1,0 +1,104 @@
+extend ../layout
+block header
+    script( src="/javascripts/index.js" )
+    script( src="/javascripts/login.js" )
+    //script( src="/javascripts/expand.js" )
+    link( href="/stylesheets/index.css", rel="stylesheet" )
+    link( href="/stylesheets/login.css", rel="stylesheet" )
+
+block content
+    img( src="pic/index1.jpg" )
+    header#header
+        p(data-toggle="modal" , data-target="#index-login" ) 欢迎
+            a( href='#' ) #{title}
+    #password_not_same.alert.alert-warning
+        a( href="#" , class="close" , data-dismiss="alert" ) &times;
+            strong 两次密码输入不一致！
+    #index-login.modal.fade( tabIndex="-1" , role="dialog" , aria-labelledby="myWordsLabel" , aria-hidden="false" )
+        div( class="modal-dialog" )
+            div( class="modal-header" )
+                label( class="label label-info") 请登录您的账号
+                button( type="button" , class="close" , data-dismiss="modal" , aria-hidden="true") &times;
+            div( class="modal-content" )
+                div( class="modal-body" )
+                    <!--模态框-->
+                    nav( class="nav nav-pills" )
+                        li#login_rel.active
+                            a( href="#login_panel" ) 登录
+                        li#register_rel
+                            a( href="#register_panel" ) 注册
+                        li.disabled
+                            a( href="#visitor_panel" ) 游客
+                    ul
+                        li.pull-left
+                            #login_panel.panel.panel-default
+                                .panel-heading
+                                    h3.panel-title 登录您的信息
+                                .panel-body
+                                    form( class="form-horizontal" , role="form"  )
+                                        .form-group
+                                            label.sr-only 名称
+                                            .col-sm-10( required )
+                                                input( id="your_name" , type="text" , class="form-control input-lg" , name="your_name" , placeholder="输入您的名称" )
+                                                .panel.panel-warning
+                                                    .panel-heading 您输入的名称为空
+                                        .form-group
+                                            label.label.label-info.sr-only 密码
+                                            .col-sm-10( required )
+                                                input( id="your_password" , type="password" , class="form-control input-lg" , name="your_password" , placeholder="输入您的密码" )
+                                                .panel.panel-warning
+                                                    .panel-heading 您输入的密码为空
+                                        .form-group.col-sm-10
+                                            input( type="submit" , value="√" , class="btn btn-lg btn-primary" )
+                                .panel-footer
+                                    label.label.label-info 未有账号，选择
+                                        a( href="#" ) 注册
+                        li.pull-left
+                            #register_panel.panel.panel-default
+                                .panel-heading
+                                    h3.panel-title 注册您的信息
+                                .panel-body
+                                    form.form-horizontal( role="form" , action="/register" , method="post" )
+                                        .form-group
+                                            label.sr-only 名称
+                                            .col-sm-10( required )
+                                                input( id="re_name" ,class="input-lg form-control" , name="re_name" , type="text" , placeholder="输入您的名称" )
+                                                .panel.panel-warning
+                                                    .panel-heading 您输入的名称为空
+                                        .form-group
+                                            label.label.label-info.sr-only 密码
+                                            .col-sm-10( required )
+                                                input( id="re_password1" , class="form-control input-lg" , type="password" , name="re_password" , placeholder="输入您的密码" )
+                                                .panel.panel-warning
+                                                    .panel-heading 您输入的密码为空
+                                        .form-group
+                                            label.control-label.sr-only 再次输入密码
+                                            .col-sm-10( required )
+                                                input( id="re_password2" , type="password" , class="form-control input-lg" ,  name="re_password_again" , placeholder="再次输入您的密码" )
+                                                .panel.panel-warning
+                                                    .panel-heading 您输入的密码为空
+                                        .form-group.col-sm-10
+                                            |是否少数民族
+                                            input( type="radio" value="是" )
+                                            | 是
+                                            input( type="radio" value="否" checked )
+                                            | 否
+                                        .form-group.col-sm-10
+                                                input( id="your_agree" , name="your_agree" , type="checkbox" , checked )
+                                                |同意我们的
+                                                a 条款
+                                        .form-group.col-sm-10
+                                                input( type="submit" , value="√" , class="btn btn-lg btn-primary" )
+    canvas( id="canvas" , width="500px" , height="300px" )
+    <!--content-->
+    section( id="vacation" , title="旅游百事通哦" , data-toggle="tooltip" , data-container="body" , data-placement="right" , data-content="点击查看有关的旅游事项" , onclick="showOther(event)" )
+        h2 攻略
+    section( id="calture" , title='点击查看有关的文化内容板块' , data-toggle="tooltip" , data-container="body" , data-placement="right" , data-content="" , onclick="showOther(event)" )
+        h2 文化长廊
+    section( id='communication' , title="小商品街逛一逛" , data-toggle="tooltip" , data-container="body" , data-placement="left" , data-content="", onclick="showOther(event)" )
+        h2 商品街
+    aside( class="to_right" , onclick="tickPage(event)" ) >>
+    aside( class="to_left" , onclick="tickPage(event)" ) <<
+    div( id="two" , class="page well well-lg" , name="two" )
+        span( class="top" )
+        iframe( id="two_frame" , frameborder="0" , index="1" , src="/talking" ) ;

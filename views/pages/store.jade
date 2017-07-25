@@ -1,0 +1,23 @@
+
+<!--Created by xulanshan on 17-7-6.-->
+extend ../layout
+block header
+    link( rel="stylesheet" , href="stylesheets/store.css" )
+    script( src="javascripts/store.js" )
+
+block content
+    slide#left.well
+        ul.nav.nav-tabs
+            li
+                a( href='#' , data-toggle='tab' ) 新加入
+            li
+                a( href='#' , data-toggle='tab' ) 原习俗
+            li
+                a( href='#' , data-toggle='tab' ) 加入
+            li
+                a( href="/" ) 主页
+    section#right.well.well-lg
+        iframe( frameborder="0" , src="/new" )
+
+
+

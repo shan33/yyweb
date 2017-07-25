@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+	<link href="css/date.css" rel="stylesheet">
+        <script src="js/jquery-3.1.1.js"></script>
+	<link href="bootstrap/css/bootstrap.min.css" rel="stylesheet">
+        <script src="bootstrap/js/bootstrap.min.js"></script>
+	<script src="js/date.js"></script>
+        <meta charset="utf-8">
+		<title>sportsgo</title>
+     <script type="text/javascript"/>
+	 $(function(){
+	    $("#post").click(function(){
+		var mtime = $("#date_time").val();
+		var mplace = $("#date_placenum").val();
+		var mnum = $("#date_pernum").val();
+		var mcontext = $("#date_other").val();
+		$.ajax({url:"post.do",
+		type:"POST",
+		async:false,
+		data:{"mtime":mtime,"mplace":mplace,"mnum":mnum,"mcontext":mcontext},
+		success: function(data){
+			if(data>0)
+			{
+				alert("发布成功！");
+				location.href = "getAllMessages.do";
+			}
+			else
+			{
+				alert("error11");
+			}
+		},
+		error: function(){
+			alert("error");
+		}
+		});
+	});
+});
+	 </script>
+	</head>
+	<body>
+        <div id="left">
+            <div id="phone">
+                <h4>我要约球</h4> 
+                <div>
+                    <form class="form-horizontal" role="form" name="date_form">
+                        <div class="form-group">
+                            <div class="col-sm-5" required>
+                                <input type="text" class="form-group-lg" id="date_time" name="date_time" placeholder="输入你要约球的时间">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-sm-5" required>
+                                <input type="text" class="form-group-lg" id="date_placenum" name="date_placenum" placeholder="输入你要约球的球场">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-sm-5" required>
+                                <input type="text" class="form-group-lg" id="date_pernum" name="date_pernum" placeholder="输入你要约球的人数">
+                            </div>
+                        </div>
+                        <div class="form-group" id="date_school" required>
+                            <span class="label label-info"  name="date_school" >四川大学</span>
+                        </div>
+                        <div class="form-group" id="date_type" required>
+                            <span class="label label-info"  name="date_type" >羽毛球</span>
+                            <span class="label label-info"  name="date_type">篮球</span>
+                            <span class="label label-info"  name="date_type">网球</span>
+                            <span class="label label-info"  name="date_type">跑步</span>
+                            <span class="label label-info"  name="date_type">其他</span>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-sm-5" required>
+                                <textarea class="form-group-lg" id="date_other" name="date_other" placeholder="备注(推荐在这里使用你的联系方式例如qq等)"></textarea>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-sm-5" required>
+                                <input class="form-group-lg" type="button" id ="post" value="提交">
+                            </div>
+                        </div>
+                        
+                    </form>
+
+                </div>
+            </div>
+        </div>
+        <div id="right">
+            <div>
+                <select>
+                    <option>选择学校</option>
+                    <option>四川大学</option>
+                </select>
+                <select>
+                    <option>选择分类</option>
+                    <option>篮球</option>
+                    <option>足球</option>
+                    <option>羽毛球</option>
+                    <option>时间</option>
+                    <option>地点</option>
+                </select>
+                <label>查看约球</label>
+            </div>
+            <div>
+                <ul>
+<c:forEach var="message" items="${allmessages}" varStatus="status">
+                    <li>
+                        <div class="panel panel-default">
+                            <div class="panel-heading">
+                                <h3 class="panel-title">${message.mtime}  ${message.mplace}</h3>
+				<span class="label label-info">${message.mtype} : ${message.mperson}人</span>
+                            </div>
+                            <div class="panel-body">
+                              ${message.mcontent} 
+                            </div>
+                            <div class="panel-footer">
+                               <a href=":;javascript"> <h5>我要加入</h3></a>
+                            </div>
+                        </div>
+                    </li>
+</c:forEach>
+                </ul>
+            </div>
+        </div>
+
+	</body>
+</html>

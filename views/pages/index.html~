@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset='utf-8'>
+        <title>土家民俗文化</title>
+        <link href="css/index.css" rel="stylesheet">
+        <link href="bootstrap/css/bootstrap.css" rel="stylesheet">
+        <script src="js/jquery-3.1.1.js"></script>
+        <script src="bootstrap/js/bootstrap.js"></script> 
+        <script src="js/index.js"></script>
+    </head>
+    <body>
+        <!--title-->
+        <img src="pic/index1.jpg">
+        <header id="header">
+            <p data-toggle="modal" data-target="#index-login" ng-bind="user">欢迎<a href="../public/search.html">你</a>哦</p>
+        </header>
+            <!--model-->
+            <div id="index-login" class="modal fade" tabIndex="-1" role="dialog" aria-labelledby="myWordsLabel" aria-hidden="false">
+                <div class="modal-dialog">
+                    <div class="modal-header">
+                        <label class="label label-info">请登录您的账号</label>
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    </div>
+                    <div class="modal-content">
+                        <div class="modal-body">
+                            <iframe src="login.html" frameborder="0" index="0"></iframe> 
+                        </div>
+                    </div>
+                </div>
+            </div>
+        <canvas id="canvas" width="500px" height="300px"> </canvas>
+        <!--content-->
+        <section id="vacation"  title="旅游百事通哦" data-toggle="tooltip" data-container="body" data-placement="right" data-content="点击查看有关的旅游事项"   onclick="showOther(event)">
+            <h2>旅游</h2>
+        </section>
+        <section id="calture" title='点击查看有关的文化内容板块' data-toggle="tooltip" data-container="body" data-placement="right" data-content=""  onclick="showOther(event)">
+            <h2>文化长廊</h2>
+        </section>
+        <a href="#two">
+            <section id='communication' title="聊一聊你的看法" data-toggle="tooltip" data-container="body" data-placement="left" data-content="">
+                <h2>聊聊</h2>
+            </section>
+        </a>
+        <aside class="to_right" onclick="tickPage(event)"> >> </aside>
+        <aside class="to_left" onclick="tickPage(event)"> << </aside>
+        <div id="two" class="page well well-lg" name="two">      
+            <span class="top"></span>
+            <iframe id="two_frame" frameborder="0" src="talking.html" index="1"/>
+        </div>
+        <!--<div id="three" class="page well well-lg" name="three">
+            <span class="top"></span>
+            <iframe id="three_frame" frameborder="0" src="talking.html" index="2"/>
+        </div>
+        <footer>
+            <p>联系:15520113806 开发所有:许灡珊</p>
+        </footer>-->
+        <script src="js/expand.js"></script>
+    </body>
+</html>

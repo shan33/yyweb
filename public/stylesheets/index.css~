@@ -1,0 +1,134 @@
+*{
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+}
+
+body > img{
+    z-index: -10;
+    position: fixed;
+    width: 100%;
+    height: 100%;
+}
+/*信息放大显示*/
+#canvas{
+    position: fixed;
+    left: 30%;
+    top: 25%;
+    border: solid 3px red;
+    border-radius: 10%;
+    
+}
+
+/*第一页信息*/
+  /*title*/
+header p{
+    margin-top: 20%;
+    width: 1.8em;
+    height: auto;
+    margin-left: 2%;
+    text-align: center;
+    font-size: 2em;
+}
+  /*section*/
+section{
+    position: absolute;
+    top: 10%;
+    width: 25%;
+    height: 80%;
+    color: #555;
+    /*border: solid 3px #555;*/
+}
+#vacation{
+    margin-left: 10%;  
+   /* background: url("../pic/person1.jpg") no-repeat;*/
+    transform: scale(1.2,1.2);
+}
+#calture{
+    margin-left: 40%;
+   /* background: url("../pic/person2.jpg") no-repeat;*/
+    transform: scale(1.2,1.2);
+}
+#communication{
+   /* background: url("../pic/person3.jpg") no-repeat;*/
+    transform: scale(1.2,1.2);
+    margin-left: 70%; 
+}
+
+/*第一页登录*/
+#index-login .modal-content{
+    position: relative;
+    height: 550px;
+}
+#index-login .modal-content iframe{
+    overflow-y: hidden;
+    width: 100%;
+    height: 550px;
+:q
+
+.to_right{
+    position: absolute;
+    width: 4em;
+    height: auto;
+    margin-left:107%;
+    margin-top: -10%;
+    right: 0;   
+    text-align: center;
+    font-size: 3em;
+    float: left;
+}
+.to_left{
+    position: absolute;
+    width: 4em;
+    font-size: 3em;
+    height: auto;
+    margin-left:103%;
+    margin-top: -10%;
+}
+/*第二页页面*/
+
+.page{
+    position: absolute;
+    margin-left: 120%;
+    width: 80%;
+    height: 80%;
+    top: 0;
+    margin-top: 5%; 
+    background: #EEEEEE;
+}
+
+/*
+#three{
+   margin-left: 220%; 
+   background: #EEEEEE;
+   border: solid 5px #000;
+}
+*/
+.page iframe{
+    width: 95%;
+    height: 90%;
+    position: absolute ;
+}
+.top{
+    margin:0 auto;
+    width: 50px;
+    height: 20px;
+    display: block;
+    background: url("../pic/toTop.jpg");
+    clip: rect(0px,50px,20px,0px);
+}
+footer{
+    width: 60%;
+    height: 20%;
+    text-align: left;
+    font-size: 1em;
+    margin: 10% 0;
+	position: absolute;
+}
+.test{
+    position: absolute;
+    margin: 10% 220%;
+    background: #444;
+    width: 200px;
+    height: 100px;
+}

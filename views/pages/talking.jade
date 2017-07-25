@@ -1,0 +1,85 @@
+extend ../layout
+block header
+    script( src="/javascripts/talking.js" )
+    link( href="/stylesheets/talking.css", rel="stylesheet" )
+block content
+    #type
+        #addInfo.btn-lg.btn-info.active 添加帖子
+            p
+                a( target="_self" , href="#myWords" )
+                    label.label.label-info( data-toggle="modal" , data-target="#myWords" ) +
+    <!--发帖model-->
+    #myWords.modal.fade( tabIndex="-1" , role="dialog" , aria-labelledby="myWordsLabel" , aria-hidden="true" )
+        .modal-dialog
+            .modal-content
+                .modal-header
+                    button.close( type="button" , data-dismiss="modal" , aria-hidden="true" ) &times;
+                    h4#myWordsLabel.modal-title 你有什么想法吗？
+                .modal-body
+                    form.formw
+                        input#my-title.form-control( type="text" , placeholder="输入您的标题" )
+                        br
+                        textarea#my-content.form-control( placeholder="输入您的内容" )
+                .modal-footer
+                    button#my-enter.btn.btn-primary( type="submit" ) 提交
+                    button.btn.btn-default( type="button" , data-dismiss="modal" ) 关闭
+    <!--评论model-->
+    #myComment.modal.fade( tabIndex="-1" , role="dialog" , aria-labelledby="myWordsLabel" , aria-hidden="true" )
+        .modal-dialog
+            .modal-content
+                .modal-header
+                    button.close( type="button" , data-dismiss="modal" , aria-hidden="true" ) &times;
+                    h4#myCommentLabel.modal-title 不错不错，小伙
+                .modal-body
+                    form.form
+                        textarea#commentContent.form-control( rows="5" , placeholder="输入你的评论内容" )
+                .modal-footer
+                    button.btn.btn-primary( type="submit" ) 提交
+                    button.btn.btn-default( data-dismiss="modal" ) 关闭
+    .row.clearfix
+        .col-md-2.column
+            ul.breadcrumb
+                li
+                    a 回到主页
+                li
+                    a 关闭广告
+        .col-md-6.column
+            ul#stickies
+            .col-md-12.column
+                .pagination
+                    li
+                        a( href="#" ) 前一页
+                    li
+                        a( href="#" ) 后一页
+                    |(共  页）
+        .col-md-4.column
+            .media.well
+                a.pull-left( href="#" )
+                    img( src="pic/person1.jpg" , class="media-object" , alt='', width="100px" , height="100px" )
+                span.close &times;
+                .media-body
+                    h4.media-heading 酉阳桃花源
+                    |世界上只有两个桃花源，一个在您心中，一个在重庆酉阳。
+            .media.well
+                a.pull-left( href="#" )
+                    img( width="100px" , height="100px" , src="pic/person1.jpg" , class="media-object" , alt='' )
+                span.close &times;
+                .media-body
+                    h4.media-heading 酉阳桃花源
+                    | 世界上只有两个桃花源，一个在您心中，一个在重庆酉阳。
+            .media.well
+                a.pull-left( href="#" )
+                    img( width="100px" , height="100px" , src="pic/person1.jpg" , class="media-object" , alt='' )
+                span.close &times;
+                .media-body
+                    h4.media-heading 诗经
+                    p 关关雎鸠，在河之洲
+                    p 窈窕淑女，君子好逑
+            .media.well
+                a.pull-left( href="#" )
+                    img( width="100px" , height="100px" , src="pic/person1.jpg" , class="media-object" , alt='' )
+                span.close &times;
+                .media-body
+                    h4.media-heading 诗经
+                    p 关关雎鸠，在河之洲
+                    p 窈窕淑女，君子好逑

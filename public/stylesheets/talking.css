@@ -1,0 +1,65 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+
+#addInfo{
+    position: fixed;
+    width: 200px;
+    height: 100px;
+    top: 65%;
+    opacity: 0.3;
+    z-index: 10;
+}
+#addInfo:hover{
+    opacity:1;
+}
+
+/*导航*/
+.breadcrumb li{
+    display: block;
+    width: 100px;
+    height: 50px;
+    border-radius: 10%;
+    margin-top: 10%;
+
+}
+/*评论*/
+#myWords form span:hover{
+    cursor: pointer;
+    background: #eee; 
+}
+#myWords form span:visited{
+    background: red;
+}
+/*书签*/
+.pagination{
+    margin-left: 15%;
+    width: 100%;
+    visibility: hidden;
+}
+.cook{
+    float: left;
+    width: 96%;
+    height: 240px;
+    margin: 2% 2%;
+    overflow-y: scroll;
+}
+.cook .panel-body{
+    height: 70%;
+    width: 100%;
+    font-size: 1em;
+    overflow: hidden;
+}
+.cook .panel-footer{
+    font-size: .7em;
+}
+.cook .panel-footer a{
+    font-size: 1em;
+}
+
+/*广告*/
+.media:hover{
+    transform: scale(1.1);
+    box-shadow: 2px 0px 2px #444444;
+}

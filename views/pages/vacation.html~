@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<link href="css/vacation.css" rel="stylesheet">
+        <script src="js/jquery-3.1.1.js"></script>
+		<link href="bootstrap/css/bootstrap.min.css" rel="stylesheet">
+        <script src="bootstrap/js/bootstrap.min.js"></script>
+		<script src="js/vacation.js"></script>
+        <meta charset="utf-8">
+		<title>玩玩</title>
+	</head>
+	<body>
+        <div id="left">
+            <div id="phone">
+                <h4>我要组队</h4> 
+                <div>
+                    <form class="form-horizontal" role="form" name="date_form">
+                        <div class="form-group">
+                            <div class="col-sm-5" required>
+                                <input type="text" class="form-group-lg" id="date_time" name="date_time" placeholder="输入你要组队的时间">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-sm-5" required>
+                                <input type="text" class="form-group-lg" id="date_placenum" name="date_placenum" placeholder="输入你要组队的地点">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-sm-5" required>
+                                <input type="text" class="form-group-lg" id="date_pernum" name="date_pernum" placeholder="输入你要组队的人数">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-sm-5" required>
+                                <textarea class="form-group-lg" id="date_other" name="date_other" placeholder="备注(推荐在这里使用你的联系方式例如qq等)"></textarea>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-sm-5" required>
+                                <input class="form-group-lg" type="submit" value="提交">
+                            </div>
+                        </div>
+                        
+                    </form>
+
+                </div>
+            </div>
+        </div>
+        <div id="right">
+            <div>
+                <label>查看组队</label>
+            </div>
+            <div>
+                <ul>
+                    <li>
+                        <div class="panel panel-default">
+                            <div class="panel-body">
+			                	<div><img src="pic/person1.jpg" name="join_pic"/></div>
+                                <div>
+				                    <h3 class="panel-title popover-show" title="个人信息"
+            data-container="body" data-toggle="popover" data-placement="right"
+            data-content="用户诚信度为100" name="join_user">许灡珊</h3>
+                                    <!--<p class="label label-info" name="join_type">篮球</p>-->
+				                    <h6 name="publish_time">14：23</h6>
+                                    
+				                </div> <br><br><br>
+ 				                <hr>
+                                <label class="label" name="join_time">7.24 本周六 </label>
+				                <label class="label" name="join_place">江安体育馆</label>
+			                	<label class="label" name="join_person">7人</label><br>
+                                <p name="join_other">备注：联系15520113806 </p>
+				                <a href=":;javascript" name="join_in"> <h3>我要加入</h3></a>
+                            </div>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="panel panel-default">
+                            <div class="panel-body">
+			                	<div><img src="pic/person1.jpg" name="join_pic"/></div>
+                                <div>
+				                    <h3 class="panel-title popover-show" title="个人信息"
+            data-container="body" data-toggle="popover" data-placement="right"
+            data-content="用户诚信度为100" name="join_user">许灡珊</h3>
+                                   <!-- <p class="label label-info" name="join_type">篮球</p>-->
+				                    <h6 name="publish_time">14：23</h6>
+                                    
+				                </div> <br><br><br>
+ 				                <hr>
+                                <label class="label" name="join_time">7.24 本周六 </label>
+				                <label class="label" name="join_place">江安体育馆</label>
+			                	<label class="label" name="join_person">7人</label><br>
+                                <p name="join_other">备注： </p>
+				                <a href=":;javascript" name="join_in"> <h3>我要加入</h3></a>
+                            </div>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="panel panel-default">
+                            <div class="panel-body">
+			                	<div><img src="pic/person1.jpg" name="join_pic"/></div>
+                                <div>
+
+				                    <h3 class="panel-title popover-show" title="个人信息"
+            data-container="body" data-toggle="popover" data-placement="right"
+            data-content="用户诚信度为100" name="join_user">许灡珊</h3>
+                                    <!--<p class="label label-info" name="join_type">篮球</p>-->
+				                    <h6 name="publish_time">14：23</h6>
+                                    
+				                </div> <br><br><br>
+ 				                <hr>
+                                <label class="label" name="join_time">7.24 本周六 </label>
+				                <label class="label" name="join_place">江安体育馆</label>
+			                	<label class="label" name="join_person">7人</label><br>
+                                <p name="join_other">备注： </p>
+				                <a href=":;javascript" name="join_in"> <h3>我要加入</h3></a>
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+	</body>
+</html>

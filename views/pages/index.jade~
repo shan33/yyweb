@@ -1,0 +1,12 @@
+extend ../layout
+
+block content
+
+		div( class='.col-md-12 .row' )
+			div( class='.panel .panel-default' )
+				div( class='.panel-heading' )
+					p( class='.panel-title')   你好
+				.panel-body
+					h2   我是许灡珊
+						
+

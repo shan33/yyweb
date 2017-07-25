@@ -1,0 +1,95 @@
+extend ../layout
+block header
+    script( src="/javascripts/culture.js" )
+    link( href="/stylesheets/culture.css", rel="stylesheet" )
+block content
+    section#left
+        div
+            img( src='pic/music.jpg' no-repeat )
+            |音乐
+        div
+            img( src='pic/dance.jpg' no-repeat )
+            |舞蹈
+        div
+            img( src='pic/history.jpg' no-repeat )
+            |历史
+        div
+            img( src='pic/girl.jpg' no-repeat )
+            |美女
+        div
+            img( src='pic/boy.jpg' no-repeat )
+            |帅哥
+        div
+            img( src='pic/mapMain.jpg' no-repeat )
+            |地图
+        div
+            img( src='pic/eat.jpg' no-repeat )
+            |吃
+        div
+            img( src='pic/drink.jpg' no-repeat )
+            |喝
+        div
+            img( src='pic/house.jpg' no-repeat )
+            |房
+        div
+            img( src='pic/marry.jpg' no-repeat )
+            |嫁
+        div
+            img( src='pic/work.jpg' no-repeat )
+            |耕作
+        div
+            img( src="pic/taboo.jpg" , no-repeat )
+            |禁忌
+        div
+            img( src="pic/communicate.jpg" , no-repeat )
+            |交流
+        div
+            img( src="pic/develop.jpg" , no-repeat )
+            |发展
+
+
+    section#right.well.well-lg
+
+        #content( name="content" )
+            img( src="pic/eat.jpg" , alt="showSomePic" , width="100%" , height="100%" , usemap="#Map" )
+            map( name="Map" )
+                area( shape="poly" , coords="353,27,364,39,381,25,404,44,437,57,464,82,477,102,485,146,482,178,473,186,472,193,457,211,439,217,428,222,390,221,381,203,366,219,366,225,348,222,330,232,297,221,307,227,272,198,255,179,259,169,256,164,259,119,276,100,300,69,319,59,333,53" , href="#" alt="这是个包子" , data-toggle="popover" , data-placement="left" , data-content="<h4>这是一包子</h4>" , title="cup" , data-container="body" )
+        aside
+            div
+                a( href="#art" )
+                    label.choose 更多信息
+                a( href="#" )
+                    label.choose 回到顶部
+                audio( controls , height="50" , width="30" )
+                    source( src="sound/木叶情歌.mp3" type="audio/mpeg" )
+                a( href="/")
+                    label.choose 主页
+        #art.tab_div
+            ul#info-tab.nav.nav-tabs
+                li.active
+                    a( href='#one' , data-toggle='tab' ) 详细
+                li
+                    a( href='#two' , data-toggle='tab' ) 来源
+                li
+                    a( href='#four' , data-toggle='tab' ) 交流
+            .tab-content.well.well-lg
+                #one.tab-pane.fade.in.active
+
+                #two.tab-pane.fade
+                    label.label.label-primary 显示有关的信息来源
+
+                #four.tab-pane.fade
+                    a.btn.btn-default( href="#mySug" , data-toggle="modal" ) 说出你的想法
+                    iframe(  src="/talking" , frameborder="0" )
+
+    #mySug.modal.fade( tabindex="-1" , role="dialog" , aria-labelledby="myModalLabel" , aria-hidden="true" )
+        .modal-dialog
+            .modal-content
+                .modal-header
+                    button.close( data-dismiss="modal" , aria-hidden="true" ) &times;
+                    h3 您想说什么呢？
+                .modal-body
+                    .form-group
+                        textarea#title.form-control( name="title" , placeholder="输入您的内容" )
+                    .form-group
+                        input.btn.btn-default( type="submit" , value="提交" )

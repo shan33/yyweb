@@ -1,0 +1,21 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+blockquote{
+    text-align: center;
+}
+.col-md-4{
+    padding: 2% 15%;
+}
+.form-group{
+    padding: 0 20%;
+}
+#other{
+    margin-left: 20%;
+    width: 60%;
+}
+button{
+    margin-left: 20%;
+}
+

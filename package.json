@@ -1,0 +1,21 @@
+{
+  "name": "YY_web",
+  "version": "0.0.1",
+  "description": "a web site about tujia majority",
+  "main": "server.js",
+  "dependencies": {
+    "express": "~4.15.3",
+    "jade": "~1.11.0",
+    "body-parser": "~1.17.2",
+    "mysql": "~2.13.0",
+    "cookie-parser": "~1.4.3",
+    "express-session": "~1.15.4"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "author": "xls",
+  "license": "BSD-2-Clause"
+}

@@ -1,0 +1,48 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+body{
+    overflow-y: auto;
+    background: #666;
+}
+#left{
+    position: absolute;
+    left: 0;
+    margin-top: 2%;
+    width: 10%;
+    height: 90%;
+    padding: 2%;
+}
+#left ul li{
+    width: 90%;
+    height: 13%;
+    font-size: 1.5em;
+    margin: 50% auto;
+}
+#right{
+    position: absolute;
+    width: 85%;
+    height: 90%;
+    margin: 2% 13%;
+    border: solid 2px #e2e2e2;
+    padding: 2%;
+    overflow-y: auto;
+    overflow-x: hidden;
+}
+.little_thing{
+    width: 100%;
+    height: auto;
+}
+.little_thing p{
+    text-align: center;
+    font-size: 2.3em;
+}
+.panel-body{
+    overflow-x: auto;
+}
+.panel-body img{
+    width: 30%;
+    height: 30%;
+}
+

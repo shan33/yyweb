@@ -1,0 +1,119 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+
+body hr{
+    height: 5px;
+    background-color: #e2e2e2;
+}
+
+.comment-div{
+    position: absolute;
+    border: solid 3px #eee;
+    width: 100%;
+    top: 3%;
+    left: 4%;
+}
+.boxclearfix{
+    border:3px solid #9acfea;
+    width:80%;
+    margin:0 auto;
+    margin-top: 3%;
+
+}
+.head{
+    width:40px;
+    height:40px;
+}
+.close{
+    float:right;
+    background:#0099CC;
+    width:30px;
+    height:25px;
+    text-align:center;
+    text-decoration:none;
+    color:white;
+}
+.main{
+    height:200px;
+    background-color: white;
+}
+li{
+    list-style:none;
+}
+.disagree{
+    float: right;
+    padding-right: 15px;
+}
+.praise{
+    margin-left: 20%;
+}
+.praise-total{
+    height:20px;
+}
+.disagree-total{
+    height:20px;
+    position: absolute;
+    right: 10.5%;
+}
+.myhead{
+    float:left;
+    width:40px;
+    height:40px;
+}
+.comment{
+    width:600px;
+}
+.comment-a:hover{
+    color: #0099CC;
+}
+.bth{
+    margin-top:10px;
+}
+.word{
+    float:right;
+}
+.comment-list{
+    padding:0;
+}
+.text-box{
+    padding-top: 10px;
+    padding-left: 40px;
+    width: 80%;
+    display: none;
+}
+.text-box textarea{
+    color: #999999;
+    background-color: white;
+}
+.in-box{
+    padding-top: 10px;
+    padding-left: 40px;
+    width: 80%;
+}
+.in-box textarea{
+    height:150px;
+}
+.bth{
+    color: white;
+    background: cornflowerblue;
+}
+
+.bth-off{
+    color: white;
+}
+.comment-content{
+    background-color: white;
+}
+
+.comment-a{
+    padding-left: 40px;
+    cursor: pointer;
+}
+
+
+
+
+
+

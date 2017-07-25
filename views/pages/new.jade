@@ -1,0 +1,80 @@
+//
+   Created by xulanshan on 17-7-6.
+
+extend ../layout
+
+block header
+    link( href="stylesheets/new.css" rel="stylesheet" )
+block content
+    .row.clearfix
+        #ads.col-md-12.column
+            .jumbotron
+                h1 全新商区诚邀商家入驻中...
+                p &nbsp;这是一个专属土家交易的板块
+                p &nbsp;在这里你可以查看你感兴趣的内容
+        .col-md-12.column
+            #search_store       <!--搜索-->
+                .input-group
+                    input.form-control( type='text' )
+                    span.input-group-addon 查找
+        .col-md-12.column
+            #choose_store       <!--选择-->
+                a( href='#eat-to' )
+                    u 吃
+                a( href='#drink-to' )
+                    u 喝
+                a( href='#handmake-to' )
+                    u 编织
+                a( href='#other-to' )
+                    u ...
+        .col-md-12.column       <!--幻灯片商品-->
+            #new-store.carousel.slide
+                ol.carousel-indicators
+                    li.active( data-slide-to='0' , data-target='#new-store' )
+                    li( data-slide-to='1' , data-target='#new-store' )
+                .carousel-inner
+                    .item.active
+                        img( src='pic/person1.jpg' )
+                        .carousel-caption
+                            <h2>酿酒</h2>
+                            <p>简介</p>
+                    .item
+                        img( src='pic/person2.jpg' )
+                        .carousel-caption
+                            <h2>豆腐</h2>
+                            <p>简介</p>
+                a.carousel-control.left( href="#new-store" , data-slide="prev" )
+                    span.glyphicon.glyphicon-chevron-left
+                a.right.carousel-control( href="#new-store" , data-slide="next" )
+                    span.glyphicon.glyphicon-chevron-right
+
+        .col-md-12.column
+            .panel.panel-default.little_thing
+                .panel-heading
+                    p.panel-title
+                        a#eat-to( href='#eat' , data-toggle='collapse' ) 吃
+                #eat.panel-collapse.collapse
+                    .panel-body
+                        .col-md-4
+                            .panel-heading
+                                p zhdsjkahudfafhdaksj
+                            .panel-body
+
+                                img(src="pic/person2.jpg", height="100px", width="100%")
+                                p ￥126
+                                a(href="http://www.taobao.com") 跳转购买
+                        .col-md-4
+                            .panel-heading
+                                p zhdsjkahudfafhdaksj
+                            .panel-body
+
+                                img(src="pic/person2.jpg", height="100px", width="100%")
+                                p ￥126
+                                a(href="http://www.taobao.com") 跳转购买
+                        .col-md-4
+                            .panel-heading
+                                p zhdsjkahudfafhdaksj
+                            .panel-body
+                                img(src="pic/person2.jpg", height="100px", width="100%")
+                                p ￥126
+                                a(href="http://www.taobao.com") 跳转购买

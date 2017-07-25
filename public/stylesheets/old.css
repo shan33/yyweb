@@ -1,0 +1,44 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+body{
+    overflow-y: auto;
+    overflow-x: hidden;
+}
+/*个人闲置物品*/
+.sale_thing{
+    float: left;
+    width: 100%;
+    height: 240px;
+    margin: 4% 0;
+    overflow-y: auto;
+}
+.sale_thing:first-child{
+    margin-top: 0;
+}
+
+.sale_thing .panel-body{
+    height: 70%;
+    width: 90%;
+    font-size: 1em;
+    overflow: hidden;
+}
+.sale_thing .panel-footer{
+    font-size: .7em;
+}
+.sale_thing .panel-footer a{
+    font-size: 1em;
+}
+/*广告区域*/
+.well{
+    text-align: center;
+    font-size: 3em;
+    padding: 50% 10%;
+    
+}
+/*闲置翻页*/
+.pagination{
+    visibility: hidden;
+    margin: 2% 30%;
+}

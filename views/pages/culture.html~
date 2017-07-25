@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset='utf-8'>
+        <title>土家文化</title>
+        <link href="css/culture.css" rel="stylesheet">
+        <link href="bootstrap/css/bootstrap.css" rel="stylesheet">
+        <script src="js/jquery-3.1.1.js"></script>
+        <script src="bootstrap/js/bootstrap.js"></script>
+        <script src="vue/vue.js"></script>
+        <script src="js/culture.js"></script>
+    </head>
+    <body>
+        <section id='left'>
+            <div>
+                <img src="pic/music.jpg" no-repeat>
+                音乐
+            </div>
+            <div >
+                <img src="pic/dance.jpg" no-repeat>
+                舞蹈</div>
+            <div >
+                <img src="pic/history.jpg" no-repeat>
+                历史</div>
+            <div >
+                <img src="pic/girl.jpg" no-repeat>
+                美女</div>
+            <div >
+                <img src="pic/boy.jpg" no-repeat>
+                帅哥</div>
+            <div >
+                <img src="pic/mapMain.jpg" no-repeat>
+                地图</div>
+            <div >
+                <img src="pic/eat.jpg" no-repeat>
+                吃</div>
+            <div >
+                <img src="pic/drink.jpg" no-repeat>
+                喝</div>
+            <div >
+                <img src="pic/house.jpg" no-repeat>
+                房</div>
+            <div >
+                <img src="pic/marry.jpg" no-repeat>
+                嫁</div>
+            <div >
+                <img src="pic/work.jpg" no-repeat>
+                耕作</div>
+            <div >
+                <img src="pic/taboo.jpg" no-repeat>
+                禁忌</div>
+            <div >
+                <img src="pic/communicate.jpg" no-repeat>
+                交流</div>
+            <div >
+                <img src="pic/develop.jpg" no-repeat>
+                发展</div>
+        </section>
+        <section id='right'  class="well well-lg" >
+            <div id='content' name="content">
+                <!-- <embed width="100%" height="100%"src="video/花轿婚假.mp4">-->
+            <img src="pic/eat.jpg" alt="showSomePic" width="100%" height="100%" usemap="#Map">
+          <!--  <map name="Map">
+              <area shape="poly" coords="353,27,364,39,381,25,404,44,437,57,464,82,477,102,485,146,482,178,473,186,472,193,457,211,439,217,428,222,390,221,381,203,366,219,366,225,348,222,330,232,297,221,307,227,272,198,255,179,259,169,256,164,259,119,276,100,300,69,319,59,333,53" href="#" alt="这是个包子" data-toggle="popover" data-placement="left" data-content="<h4>这是一包子</h4>" title="cup" data-container="body">
+              </map>-->
+            </div>
+            <aside>
+                <div>
+                    <a href="#art"><label class="choose">更多信息</label></a>
+                    <a href="#"><label class="choose">回到顶部</label></a>
+                    <audio controls height="50" width="30">
+                        <source src="sound/木叶情歌.mp3" type="audio/mpeg">
+                    </audio>
+                    <a href="index.html"><label class="choose">主页</label></a>
+
+                </div>
+            </aside>
+           
+            
+ 				<div class="tab_div" id="art"  >
+                    <ul id="info-tab" class="nav nav-tabs">
+						<li class="active">
+							<a href="#one" data-toggle="tab" @:change>详细</a>
+						</li>
+						<li>
+							<a href="#two" data-toggle="tab" @:change>来源</a>
+						</li>
+						<li>
+							<a href="#three" data-toggle="tab" @:change>有关报道</a>
+						</li>
+						<li>
+							<a href="#four" data-toggle="tab" @:change>交流</a>
+						</li>
+					</ul>
+					<div class="tab-content well well-lg">
+						<div id="one" class="tab-pane fade in active"> 
+						</div>
+						<div id="two" class="tab-pane fade"> 
+							<label class="label label-primary">显示有关的信息来源</label>
+						</div>
+						<div id="three" class="tab-pane fade"> 
+							<label class="label label-info">更新有关的报道</label>
+						</div>
+						<div id="four" class="tab-pane fade"> 
+                            <a href="#mySug" class="btn btn-default" data-toggle="modal">说出你的想法</a>
+                           <div class="modal fade" id="mySug" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+                               aria-hidden="true">
+                               <div class="modal-dialog">
+                                   <div class="modal-content">
+                                       <div class="modal-header">
+                                           <button class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                                           <h3>您想说什么呢？</h3>
+                                        </div>
+                                        <div class="modal-body">
+                                                <div class="form-group">
+                                                    <textarea id="title" type="text" class="form-control" name="title" placeholder="输入您的内容" ></textarea>
+                                                </div>
+                                                <div class="form-group">
+                                                </div>
+                                        </div>
+                                        <div class="modal-footer">
+                                                <input type="submit" class="btn btn-default" value="提交">
+                                        </div>    
+                                    </div>
+                                </div>
+                            </div>
+                            <iframe  src="talking.html" frameborder="0" />
+                        </div>
+                    </div>
+                </div>
+            </section>
+    </body>
+</html>

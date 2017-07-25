@@ -1,0 +1,33 @@
+$(function(){
+    addListener() ;	//添加监听函数
+}) ;
+
+function addListener(){
+    //移动到我的信息
+    $('#left .pic a').mouseenter(function(event){
+	var $target = $(this) ;
+	var info ;
+	if( $target.attr('id') == 'info' )
+		info = "<p>学校：</p><hr><p>学院: </p>" ;
+	else
+		info = "<p>我的发帖数：  <span class='badge'>0</span><hr>" +"<p>我的消息： <span class='badge'>0</span>" ;
+	$target.popover({
+	    trigger:'click', //触发方式
+	    html: true,
+	    placement: right,
+	    title: '许灡珊',	
+	    content: info,
+	});
+	$target.popover('show') ;
+    }).click(function(event){
+	var $target = $(event.target) ;
+    	$target.popover('hide') ;
+    }) ;
+
+    //回复
+    $('#right .panel-body a').click(function(){
+ 	$('#right .panel-body textarea').slideToggle() ;
+
+    }) ;
+	
+}

@@ -1,0 +1,88 @@
+*{
+    display: block;
+    margin: 0;
+    padding: 0;
+}
+body{
+    overflow: hidden;
+}
+/*left*/
+#left{
+    float: left;
+    position: fixed;
+    width: 20%;
+    height: 100%;
+    border-right: solid 10px #5a5a5a;
+    overflow-y: auto;
+    background-color: #444;
+}
+#left div{
+    margin: 10% auto;
+    width: 150px;
+    height: 20%;
+    border: solid 2px #5a5a5a;
+    text-align: center;
+    color: #fff;
+}
+#left div img{
+   width: 150px;
+   height: 100%;
+   z-index: -1;
+}
+
+/*right*/
+#right{
+    float: left;
+    position: relative;
+    margin: 2% 20%;
+    width: 80%;
+    height: 600px;
+    border: solid 2px #5a5a5a;
+
+}
+#content{
+    position: absolute;
+    margin: 4% 15%;
+    width: 750px;
+    height: 480px;
+    border: solid 4px #0D3349;
+}
+.tab-pane span{
+    width: 80%;
+    margin: 4% 5%;
+}
+#right aside{
+    position: fixed;
+    width: 50px;
+    height: auto;
+    margin: 10% 75%;
+    /*border: solid 2px saddlebrown;*/
+    z-index: 10;
+}
+.choose{
+    padding: 6px;
+    margin: 50% auto;
+    background: #8a6d3b;
+}
+#right a[name=art]{
+    position: absolute;
+    margin: 125% auto;
+
+}
+#right .tab_div{
+    position: absolute;
+    margin: 70% 0%;
+    padding-top: 0%;
+    width: 100%;
+    height: 100%;
+}
+#right #four iframe{
+    width: 100%;
+    height: 500px;
+    overflow: auto;
+}
+#right #one iframe{
+    width: 100%;
+    height: auto;
+    overflow: auto;
+}

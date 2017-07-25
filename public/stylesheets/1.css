@@ -1,0 +1,60 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+
+/*左边*/
+#left{
+    float: left;
+    width: 50%;
+    height: 700px;
+    background-color: #eee ;
+    border-right: solid 3px #696969;
+}
+/*约球*/
+#left #phone{
+    margin-left: 15%;
+}
+#left #phone h2{
+    text-align: center;
+}
+#left #phone div form{
+    padding: 20% 10%;
+    background: #87ceed;
+    width: 80%;
+    height: 80%;
+}
+#left #phone div form *{
+    font-size: 1em; 
+    width: 100%;
+    padding: 1% 2%;
+}
+
+/*右边*/
+#right{
+    float: left;
+    width: 50%;
+    height: 700px;
+    background-color: #eee;
+    overflow-x: hidden;
+    
+}
+#right div:first-child{
+    text-align: center;
+    margin: 3% auto; 
+    width: 50%;
+    height: auto;
+}
+#right div:last-child{
+    width: 90%;
+    height: auto; 
+    padding: 2% 2%;
+
+}
+#right div:last-child ul {
+    overflow-x: hidden;
+    list-style: none;
+    margin: 3% 8%;
+    height: 30%;
+    width: 100%;
+}
