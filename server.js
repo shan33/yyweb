@@ -56,9 +56,12 @@ app.get('/',function(req,res){              //主页面
         if(err)
             console.log(err ) ;
         else{
-            console.log( "server.js--人数： " +personNumber) ;
+            console.log( "server.js--人数： " +personNumber ) ;
+            var welcomeName = '未登录' ;
+            if( req.session.Cookie )
+                welcomeName = req.session.Cookie.name ;
             res.render('./pages/index',{
-                title: '未登录'
+                title: welcomeName
             }) ;
         }
     })
@@ -77,8 +80,14 @@ app.post('/login',function(req,res){
                 if(result == null || result=='' )
                     callback(null, 0) ;
                 else{
-                    console.log( result.NAME ) ;
-                    callback(null, req.body.name ) ;
+                    console.log( "登录 result："　+ result[0].NAME) ;
+                    var user = {
+                        name: result[0].NAME,
+                        id: result[0].ID,
+                        minority: result[0].MINORITY
+                    } ;
+                    //for( var info in )
+                    callback(null, user ) ;
                 }
             } ) ;
         }
@@ -91,8 +100,8 @@ app.post('/login',function(req,res){
             res.send('0') ;
         }else{
             console.log( "登录成功-- " +myuser) ;
-            res.send( req.body.name ) ;
-            //res.session.user = req.body.name ;
+            req.session.Cookie = myuser ;
+            res.send( myuser.name) ;
 
         }
     })
@@ -126,42 +135,45 @@ app.post('/register',function(req,res){
 /*退出登录*/
 app.post('/logout',function(req,res){
     console.log('server.js--用户退出登录') ;
-    res.session.user = null ;
+    req.session.Cookie = null ;
     res.redirect('/') ;
 }) ;
 /*发帖*/
 app.post('/post',function(req,res){
     //console.log("发帖信息： " + req.body.user +" : " +req.body.time +" -- " + req.body.title) ;
-    var message = {
-        user: req.body.user,
-        time: req.body.time,
-        title: req.body.title,
-        content: req.body.content
-    } ;
-    async.waterfall([
-        //查询
-        function(callback){
-            mydatabase.query( user.postMessageQuery, [message.user,message.title,message.content,message.time] , function(err,result){
-                //console.log("发帖") ;
-                if(result == null || result=='' )
-                    callback(null, 0) ;
-                else{
-                    callback(null, req.body.user ) ;
-                }
-            } ) ;
-        }
-    ],function(err,myuser){
-        if(err) {
-            console.log(err);
-            res.send('0') ;
-        }else if(myuser == 0) {
-            console.log("发帖失败") ;
-            res.send('0') ;
-        }else{
-            //console.log( "发帖成功-- " +myuser) ;
-            res.send('1') ;
-        }
-    })
+    if( req.session.Cookie) {
+        var message = {
+            user: req.session.Cookie.id,
+            time: req.body.time,
+            title: req.body.title,
+            content: req.body.content
+        };
+        async.waterfall([
+            //查询
+            function (callback) {
+                mydatabase.query(user.postMessageQuery, [message.user, message.title, message.content, message.time], function (err, result) {
+                    //console.log("发帖") ;
+                    if (result == null || result == '')
+                        callback(null, 0);
+                    else {
+                        callback(null, req.body.user);
+                    }
+                });
+            }
+        ], function (err, myuser) {
+            if (err) {
+                console.log(err);
+                res.send('0');
+            } else if (myuser == 0) {
+                console.log("发帖失败");
+                res.send('0');
+            } else {
+                //console.log( "发帖成功-- " +myuser) ;
+                res.send('1');
+            }
+        })
+    }else
+        res.send('0');
 
 
 }) ;

@@ -72,9 +72,9 @@ function showSticky(type){
                 for(var i=0;i<mes.length;i++){
                     var message = mes[i] ;
                     addSticky(message.POST_USER, message.TITLE, message.CONTENT,message.TIME) //,my_label) ;
-
                 }
-                addCommentLitener() ;
+                $('#stickies').find('div.panel-footer').append("<p><u onclick='myComment(this)'>参与讨论一波</u></p>") ;
+                //addCommentLitener() ;
                 $('.pagination').css('visibility','visible') ;
             }else{
                 $('#stickies').empty().append('<h2>亲，发个帖子可以脱单哦～</h2>') ;
@@ -123,16 +123,16 @@ function addSticky(user,my_title,my_content,time ){  //,my_label){
     var p_footer = document.createElement("div") ;      //footer
     p_footer.setAttribute("class","panel-footer") ;
     // var li = document.createElement("li") ;
-    var comment = document.createElement("p") ;      //footer
+   /* var comment = document.createElement("p") ;      //footer
     comment.setAttribute("class","comment") ;
-    comment.innerHTML = '<u> 参与讨论一波？ </u>' ;
+    comment.innerHTML = '<u> 参与讨论一波？ </u>' ;*/
 
     p_title.innerHTML = user+ ':    ' +my_title + "<small><i>" +time +"</i></small>" ;
     // p_label.innerHTML = my_label ;
     p_content.innerHTML = my_content ;
 
 
-    p_footer.appendChild(comment) ;
+    //p_footer.appendChild(comment) ;
     div_title.appendChild(p_title) ;
     //div_title.appendChild(p_label) ;		//添加标签
     span.appendChild(div_title) ;
@@ -142,23 +142,17 @@ function addSticky(user,my_title,my_content,time ){  //,my_label){
     sticky.appendChild(span) ;
 
 
-
-
 }
 //添加监听
-function addCommentLitener(){
-    $('#stickies').find('div.panel-footer').append("<p><u onclick='alert('提交评论')'>参与讨论一波</u></p>") ;
-    //监听
-    $('.comment').addEventListener("mouseover",function(){
-        p_footer.appendChild( document.createElement('ul') ) ;
-    }) ;
-    //评论
-    $('.comment').childNodes[0].addEventListener('click',function(){
-        $('#myComment').modal('show') ;
-        //$(this).append("<br>" + comment_data + '<hr>') ;
-    }) ;
+function myComment(obj){
+    var post_to = $(obj).parent().prev().prev().children().find("h3.panel-title").html() ;
+    alert(post_to) ;
+    $('#myComment').modal('show') ;
 
-    $("#myComment button[type='submit']").click(function(){
+    //评论
+
+
+    /*$("#myComment button[type='submit']").click(function(){
         var comment_data ;
         comment_data = $('#myComment textarea').val() ;
         alert("您提交给1"  + "的内容为： " +comment_data) ;
@@ -166,6 +160,6 @@ function addCommentLitener(){
     }) ;
     $('.comment').addEventListener("mouseleave",function(){
          $(this).empty() ;
-    }) ;
+    }) ;*/
 }
 
