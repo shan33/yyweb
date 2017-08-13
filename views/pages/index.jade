@@ -91,8 +91,9 @@ block content
                                                 input( type="submit" , value="√" , class="btn btn-lg btn-primary" )
     canvas( id="canvas" , width="500px" , height="300px" )
     <!--content-->
-    section( id="vacation" , title="旅游百事通哦" , data-toggle="tooltip" , data-container="body" , data-placement="right" , data-content="点击查看有关的旅游事项" , onclick="showOther(event)" )
-        h2 攻略
+    section( id="vacation" , title="点击查看我的信息" , data-toggle="tooltip" , data-container="body" , data-placement="right" , data-content="点击查看我的信息" , onclick="showOther(event)" )
+        h2 新的消息
+            span.badge 0
     section( id="calture" , title='点击查看有关的文化内容板块' , data-toggle="tooltip" , data-container="body" , data-placement="right" , data-content="" , onclick="showOther(event)" )
         h2 文化长廊
     section( id='communication' , title="小商品街逛一逛" , data-toggle="tooltip" , data-container="body" , data-placement="left" , data-content="", onclick="showOther(event)" )
@@ -101,4 +102,4 @@ block content
     aside( class="to_left" , onclick="tickPage(event)" ) <<
     div( id="two" , class="page well well-lg" , name="two" )
         span( class="top" )
-        iframe( id="two_frame" , frameborder="0" , index="1" , src="/talking" ) ;
+        iframe( id="two_frame" , frameborder="0" , index="1" , src="/" ) ;

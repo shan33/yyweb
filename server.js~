@@ -239,7 +239,7 @@ app.post('/setComments',function(req,res){
 /*获取评论*/
 app.get('/getComments',function(req,res){
     //评论
-    // console.log( "评论 :" +req.query.id) ;
+    console.log( req.query.id) ;
     async.waterfall([
         //查询
         function(callback){
@@ -261,6 +261,7 @@ app.get('/getComments',function(req,res){
             console.log('获取失败') ;
             res.send('0') ;
         }else{
+            console.log('hfjdksh') ;
             res.send(result) ;
         }
     }) ;
@@ -312,72 +313,11 @@ app.get('/new',function(req,res){		//talking
 }) ;
 app.get('/self_info',function(req,res){		//talking
     // console.log("server.js--self_info页面请求") ;
-    var queryMean = req.query.message;
-    // console.log(req.query.message + "----" +req.params.message);
-    if (typeof(queryMean) == 'undefined') {
-        // console.log("hjd");
-        if (req.session.Cookie) {
-            res.render('./pages/self-info', {
-                title: '个人信息',
-                //myInfo: '暂无新的消息'
-            });
-        }
-        /*else
-         res.send('0');*/
+    if(req.session.Cookie){
+    	res.render('./pages/self-info',{
+    	    title: '个人信息'
+    	}) ;
     }else{
-        if( req.session.Cookie) {
-            var userID = req.session.Cookie.id;
-            console.log("query: " + queryMean +" ID:" +userID);
-            async.waterfall([
-                    //查询
-                    function (callback) {
-                        if (queryMean == 'info') {
-                            mydatabase.query(user.getSelfPostQuery, [userID], function (err, result) {
-                                console.log("个人发帖") ;
-                                if (result == null || result == '')
-                                    callback(null, {
-                                        name: "info",
-                                        result: '0'
-                                    });
-                                else {
-                                    console.log(result[0]);
-                                    callback(null, {
-                                        name: "info",
-                                        result: result
-                                    });
-                                }
-                            });
-                        }else{
-                            mydatabase.query(user.getSelfMessageQuery, [userID], function (err, result) {
-                                console.log("个人消息") ;
-                                if (result == null || result == '')
-                                    callback(null, {
-                                        name: "message",
-                                        result: '0'
-                                    });
-                                else {
-                                    // console.log(result[0]);
-                                    callback(null, {
-                                        name: "message",
-                                        result: result
-                                    });
-                                }
-                            });
-                        }
-                    }
-                ], function (err, result) {
-                    if (err) {
-                        console.log(err);
-                        res.send('失败');
-                    }else {
-                        res.send(result);
-                    }
-                });
-        }else
-            res.redirect('/');
+	res.redirect('/index');
     }
-});
-app.get('/self_info',function(req,res){		//talking
-
-
 }) ;

@@ -1,4 +1,8 @@
 $(document).ready(init) ;
+var posts;
+var comments;
+var post_index = 0;
+var comments_index = 0 ;
 function init(){
     showSticky("") ;      //显示便利
     
@@ -14,8 +18,7 @@ function init(){
         var my_title = document.getElementById("my-title").value ;
         var my_content = document.getElementById("my-content").value ;
         var my_user = 1 ;
-        var time = new Date() ;
-        var my_time =  time.getFullYear() +"-" +time.getMonth() +"-" +time.getDay() +" " +time.getHours() +":" +time.getMinutes() +":" +time.getSeconds() ;
+        var my_time =  getTime() ;
         $.ajax({
             url: 'http://127.0.0.1:8080/post' ,
             type: 'post',
@@ -37,78 +40,65 @@ function init(){
             }
             
         }) ;
-        //post_label(my_title,my_content ) ;  //,my_label) ;      //提交帖子
 
     }) ;
 }
 
-//发帖到服务器z
-function post_label(my_title,my_content,id,time ){  //,my_label){
-    var key = "sticky_" +localStorage.length ;
-    console.log(key,my_title+":" + my_content + ": user"  ) ;   //+my_label + ":" + 'user') ;
-    localStorage.setItem( key,my_title+":" + my_content + ": user"  ) ;//key,my_title+":" + my_content + ": " +my_label + ":" + 'user') ;
-
-
-
-}
-
-
 //显示便利贴
-function showSticky(type){
-    var flag = true ;
+function showSticky(type) {
     $.ajax({
         url: 'http://127.0.0.1:8080/getPosts',
         type: 'get',
         async: false,
-        success: function ( response ) {
-            if( response != 0) {
-                var mes = JSON.parse(JSON.stringify(response));
-                //alert( JSON.stringify(mes[0])) ;
-                var pages ;
-                if( mes.length%7 == 0)
-                    pages = mes.length%7 ;
-                else
-                    pages = mes.length%7+1 ;
-                for(var i=0;i<mes.length;i++){
-                    var message = mes[i] ;
-                    addSticky(message.POST_USER, message.TITLE, message.CONTENT,message.TIME) //,my_label) ;
-                }
-                $('#stickies').find('div.panel-footer').append("<p><u onclick='myComment(this)'>参与讨论一波</u></p>") ;
-                //addCommentLitener() ;
-                $('.pagination').css('visibility','visible') ;
-            }else{
-                $('#stickies').empty().append('<h2>亲，发个帖子可以脱单哦～</h2>') ;
+        success: function (response) {
+            if (response != 0) {
+                posts = JSON.parse(JSON.stringify(response));
+                showInfo(3) ;
+            } else {
+                $('#stickies').empty().append('<h2>亲，发个帖子可以脱单哦～</h2>');
             }
         },
         error: function () {
-            alert("页面有错") ;
+            alert("页面有错");
         }
-        
-    }) ;
-   /* for(var i=0; i<localStorage.length;i++){
-        var key = localStorage.key(i) ;
-        if(key.substring(0,6) == "sticky"){
-            flag = false ;
-            $('#stickies').empty() ;
-            var items = localStorage.getItem(key).split(':') ;      //根据冒号分出 标题和内容
-            var my_content = items[1] ;                             //获取内容
-            var my_title = items[0] ;                               //获取标题
-            // var my_label = items[2] ;                               //获取标签
-            var user = items[3] ;                                   //获取用户
-            addSticky(user,my_title,my_content ) //,my_label) ;
-        }
-    }
-    if(flag)
-        $('#stickies').empty().append('<h2>亲，发个帖子可以脱单哦～</h2>') ;
+
+    });
+}
+function showInfo(d){
+    if( d==1)
+        post_index-- ;
+    else if(d==2)
+        post_index++ ;
     else
-        $('.pagination').css('visibility','visible') ;*/
-    
+        post_index=0;
+    var pages = 0;
+    if (posts.length % 7 == 0 && mes.length > 7)
+        pages = posts.length % 7;
+    else
+        pages = posts.length % 7;
+    // 0-6,  7-13
+    if( (post_index) != pages && post_index>=0) {
+        $('#stickies').empty() ;
+        $('#pages_index').html('第 ' +(post_index+1) +' 页') ;
+        $('#pages').html('共 ' +pages +' 页') ;
+        var last = (post_index + 1) * 7 - 1;
+        for (var i = 7 * post_index; i < last && i < posts.length; i++) {
+            var message = posts[i];
+            addSticky(message.ID, message.POST_USER, message.NAME, message.TITLE, message.CONTENT, message.TIME) //,my_label) ;
+
+        }
+        $('#stickies').find('div.panel-footer').append("<p><u onclick='myCommentShowDialog(this)'>参与讨论一波</u>&nbsp;&nbsp;&nbsp;<u onclick='otherCommentShow(this)'>查看评论</u></p>")
+            .append("<div class='writeComment'><textarea rows='5' cols='80' placeholder='不错不错，小伙子'></textarea>" +
+                "<br><input type='button' value='提交' onclick='myComment(this)'></div>");
+        $('#stickies .panel-footer .writeComment').hide();
+        $('.pagination').css('visibility', 'visible');
+    }else
+        alert('只有这么多了哦！') ;
+
 }
 
-
-
 //增加便利贴
-function addSticky(user,my_title,my_content,time ){  //,my_label){
+function addSticky(postID,userID,user,my_title,my_content,time ){  //,my_label){
     var sticky = document.getElementById("stickies") ;
     var span = document.createElement("div") ;     //span
     span.setAttribute("class","panel panel-default cook") ;
@@ -116,25 +106,30 @@ function addSticky(user,my_title,my_content,time ){  //,my_label){
     div_title.setAttribute("class","panel-heading") ;
     var p_title = document.createElement('h3') ;        //title
     p_title.setAttribute("class","panel-title") ;
+
+    var p_id = document.createElement('label') ;
+    p_id.setAttribute("class","postID") ;
+    var user_id = document.createElement('label') ;
+    user_id.setAttribute("class","userID") ;
+
     var p_label = document.createElement('span') ;        //label
     p_label.setAttribute("class","label label-info") ;
     var p_content = document.createElement('div') ;     //body
     p_content.setAttribute("class","panel-body") ;
     var p_footer = document.createElement("div") ;      //footer
     p_footer.setAttribute("class","panel-footer") ;
-    // var li = document.createElement("li") ;
-   /* var comment = document.createElement("p") ;      //footer
-    comment.setAttribute("class","comment") ;
-    comment.innerHTML = '<u> 参与讨论一波？ </u>' ;*/
 
-    p_title.innerHTML = user+ ':    ' +my_title + "<small><i>" +time +"</i></small>" ;
-    // p_label.innerHTML = my_label ;
+    p_title.innerHTML = user+ ':    ' +my_title + "<small><i>" +time +"</i></small>" ;       // postID -> user
     p_content.innerHTML = my_content ;
+    p_id.innerHTML = postID ;
+    user_id.innerHTML = userID ;
 
-
-    //p_footer.appendChild(comment) ;
     div_title.appendChild(p_title) ;
-    //div_title.appendChild(p_label) ;		//添加标签
+    div_title.appendChild(p_id) ;
+    div_title.appendChild(user_id) ;
+    p_id.style.visibility = 'hidden' ;
+    user_id.style.visibility = 'hidden' ;
+
     span.appendChild(div_title) ;
     span.appendChild(p_content) ; 
     span.appendChild(p_footer) ;
@@ -145,21 +140,66 @@ function addSticky(user,my_title,my_content,time ){  //,my_label){
 }
 //添加监听
 function myComment(obj){
-    var post_to = $(obj).parent().prev().prev().children().find("h3.panel-title").html() ;
-    alert(post_to) ;
-    $('#myComment').modal('show') ;
 
-    //评论
-
-
-    /*$("#myComment button[type='submit']").click(function(){
-        var comment_data ;
-        comment_data = $('#myComment textarea').val() ;
-        alert("您提交给1"  + "的内容为： " +comment_data) ;
-        $('#myComment').modal('hide') ;
+    alert("评论： " + commentToID ) ;
+    $.ajax({
+        url: 'http://127.0.0.1:8080/setComments',
+        type: 'post',
+        data:{
+            postID: postID,
+            commentTo: commentToID,
+            commentContent: commentData,
+            commentTime: getTime()
+        },
+        async: false,
+        success: function (response) {
+            if( response == 0)
+                alert( "请先登录");
+            else if(response != 1)
+                alert("评论失败") ;
+            else
+                alert("评论成功") ;
+        },
+        error: function () {
+            alert("评论失败") ;
+        }
     }) ;
-    $('.comment').addEventListener("mouseleave",function(){
-         $(this).empty() ;
-    }) ;*/
-}
 
+    $(obj).parent().slideToggle() ;
+
+
+}
+function myCommentShowDialog(obj){
+    $('.info').remove() ;
+    var $next = $(obj).parent().next() ;
+    $next.slideToggle() ;
+}
+function otherCommentShow(obj){
+    //if( $(obj).next()!= null)
+    $('.info').remove() ;
+    var postID = $(obj).parent().parent().prev().prev().find('label.postID').html() ;
+    // alert(post)
+    $.ajax({
+        url: 'http://127.0.0.1:8080/getComments?id=' +postID,
+        type: 'get',
+        success: function (response) {
+            if(response == 0)
+                alert("暂无评论～") ;
+            else{
+                var mes = JSON.parse(JSON.stringify(response));
+                for(var i=0; i<mes.length; i++){
+                    var message = mes[i] ;
+                    $(obj).append("<div class='info'><p ><b>" +message.NAME +"</b>:  " +message.COMMIT_CONTENT + "</p></div><hr class='info'>") ;
+                }
+            }
+        },
+        error: function () {
+            alert("网络错误，获取失败");
+        }
+    });
+}
+//获取时间
+function getTime(){
+    var time = new Date() ;
+    return time.getFullYear() +"-" +time.getMonth() +"-" +time.getDay() +" " +time.getHours() +":" +time ;
+}

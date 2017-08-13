@@ -55,7 +55,7 @@ body{
     overflow-x: auto;
 }
 .panel-body img{
-    width: 80%;
+    width: 50%;
     height: 60%;
 }
 

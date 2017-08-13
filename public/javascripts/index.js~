@@ -88,7 +88,7 @@ function tickPage(event){
     switch($class.className){
         case "to_right":
             $("html").animate({"scrollLeft":$("#two").css("marginLeft") },1000) ;
-	    $("#two_frame").attr("src","/talking") ;
+	    $("#two_frame").src("/talking") ;
             break;
         case "to_left":
             $("html").animate({"scrollLeft":$("#header").css("marginLeft") },1000) ;

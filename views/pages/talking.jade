@@ -48,10 +48,11 @@ block content
             .col-md-12.column
                 .pagination
                     li
-                        a( href="#" ) 前一页
+                        a( href="#" onclick="showInfo('1')") 前一页
                     li
-                        a( href="#" ) 后一页
-                    |(共  页）
+                        a( href="#" onclick="showInfo('2')") 后一页
+                    p#pages
+                    p#pages_index
         .col-md-4.column
             .media.well
                 a.pull-left( href="#" )

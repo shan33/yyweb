@@ -92,7 +92,7 @@ block content
                                 p zhdsjkahudfafhdaksj
                             .panel-body
 
-                                img(src="pic/coin_wine.jpg", height="200px", width="100%")
+                                img(src="pic/coin_wine.jpg", height="100px", width="100%")
                                 p ￥126
                                 a(href="http://www.taobao.com") 跳转购买
                         .col-md-3
