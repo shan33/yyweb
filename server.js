@@ -340,7 +340,7 @@ app.get('/self_info',function(req,res){		//talking
                                         result: '0'
                                     });
                                 else {
-                                    console.log(result[0]);
+                                    // console.log(result[0]);
                                     callback(null, {
                                         name: "info",
                                         result: result
@@ -356,7 +356,7 @@ app.get('/self_info',function(req,res){		//talking
                                         result: '0'
                                     });
                                 else {
-                                    // console.log(result[0]);
+                                     // console.log(result[0]);
                                     callback(null, {
                                         name: "message",
                                         result: result

@@ -143,8 +143,45 @@ function addMessage(res, obj){
         obj.append("<li><div class='panel panel-default'><div class='panel-body'>" +
             "<p><b>" +response.SEND_FROM +"</b>回复了你的帖子 ---- (&nbsp;&nbsp;<a><i>" +response.CONTENT +"</i></a>)</p><hr>" +
             "<p>" +response.COMMIT_CONTENT  +"</p>" +
-            "<a onclick='$(this).next().next().slideToggle();'>回复</a><br><textarea class='col-sm-10' placeholder='回复内容: '></textarea>" +
-            "</div></div></li>");
+            "<a onclick='$(this).next().next().slideToggle();'>回复</a><br>" +
+            "<div class='response'>" +
+                "<textarea class='col-sm-10' placeholder='回复内容: '></textarea>" +
+                "<label style='visibility: hidden'>" + response.POST_ID +"</label>" +
+                "<label style='visibility: hidden'>" + response.SEND_FROM +"</label>" +
+                "<u onclick='responseOther($(this))'>提交</u>" +
+            "</div> </div></li>");
     }
-    obj.find('textarea').hide();
+    obj.find('div.response').hide();
+}
+
+function responseOther(obj){
+    var datas = {
+        commentTo: obj.prev().html(),
+        postID: obj.prev().prev().html(),
+        commentContent: obj.parent().find('textarea').val(),
+        commentTime: getTime()
+    };
+    $.ajax({
+        url: 'http://127.0.0.1:8080/setComments',
+        type: 'post',
+        data: datas,
+        async: false,
+        success: function (response) {
+            if( response == 0)
+                alert( "请先登录");
+            else if(response != 1)
+                alert("回复失败") ;
+            else
+                alert("回复成功") ;
+        },
+        error: function () {
+            alert("回复失败") ;
+        }
+    }) ;
+}
+
+//获取时间
+function getTime(){
+    var time = new Date() ;
+    return time.getFullYear() +"-" +time.getMonth() +"-" +time.getDay() +" " +time.getHours() +":" +time ;
 }

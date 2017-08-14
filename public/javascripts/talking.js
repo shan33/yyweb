@@ -87,8 +87,11 @@ function showInfo(d){
             addSticky(message.ID, message.POST_USER, message.NAME, message.TITLE, message.CONTENT, message.TIME) //,my_label) ;
 
         }
-        $('#stickies').find('div.panel-footer').append("<p><u onclick='myCommentShowDialog(this)'>参与讨论一波</u>&nbsp;&nbsp;&nbsp;<u onclick='otherCommentShow(this)'>查看评论</u></p>")
-            .append("<div class='writeComment'><textarea rows='5' cols='80' placeholder='不错不错，小伙子'></textarea>" +
+        $('#stickies').find('div.panel-footer')
+            .append("<p><u onclick='myCommentShowDialog(this)'>参与讨论一波</u>&nbsp;&nbsp;&nbsp;" +
+                        "<u onclick='otherCommentShow(this)'>查看评论</u></p>" +
+                    "<div class='writeComment'>" +
+                        "<textarea rows='5' cols='80' placeholder='不错不错，小伙子'></textarea>" +
                 "<br><input type='button' value='提交' onclick='myComment(this)'></div>");
         $('#stickies .panel-footer .writeComment').hide();
         $('.pagination').css('visibility', 'visible');
@@ -141,7 +144,12 @@ function addSticky(postID,userID,user,my_title,my_content,time ){  //,my_label){
 //添加监听
 function myComment(obj){
 
-    alert("评论： " + commentToID ) ;
+    var $parent = $(obj).parent().parent().parent().find('div.panel-heading');
+    alert( $parent.html());
+    var postID = $parent.find('label.postID').html();
+    var commentToID = $parent.find('label.userID').html();
+    var commentData = $(obj).prev().prev().val();
+    // alert("评论： " + commentToID +" : " +postID + " : " +commentData) ;
     $.ajax({
         url: 'http://127.0.0.1:8080/setComments',
         type: 'post',
