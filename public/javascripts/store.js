@@ -12,15 +12,9 @@ function init(){
     $('#left li').click(function(event){
         switch($(this).index()){
             case 0:
-                console.log("new.html") ;
                 $('#right iframe').attr('src','/new') ;
                 break;
             case 1:
-                console.log("old.html") ;
-                $('#right iframe').attr('src','/old') ;
-                break;
-            case 2:
-                console.log("publish.html") ;
                 $('#right iframe').attr('src','/vacation') ;
                 break;
 

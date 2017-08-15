@@ -86,7 +86,6 @@ app.post('/login',function(req,res){
                         id: result[0].ID,
                         minority: result[0].MINORITY
                     } ;
-                    //for( var info in )
                     callback(null, user ) ;
                 }
             } ) ;

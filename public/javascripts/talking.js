@@ -145,7 +145,7 @@ function addSticky(postID,userID,user,my_title,my_content,time ){  //,my_label){
 function myComment(obj){
 
     var $parent = $(obj).parent().parent().parent().find('div.panel-heading');
-    alert( $parent.html());
+    // alert( $parent.html());
     var postID = $parent.find('label.postID').html();
     var commentToID = $parent.find('label.userID').html();
     var commentData = $(obj).prev().prev().val();
