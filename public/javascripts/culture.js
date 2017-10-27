@@ -29,10 +29,22 @@ $(document).ready(function(){
     //信息切换
     $('#left img').click(function(event){
         $("[data-toggle='popover']").popover('hide') ;
+
         changeInfo(event) ; 
         $("[data-toggle='popover']").popover('show') ;
     }).mouseenter(function(event){
-        $("#left").animate({"opacity":"1"}) ;
+        var tar = $(event.target);
+        tar.css('width','180px'); 
+        // tar.css('height','25%'); 
+        var parent = $(event.target).parent();
+        parent.css('width','180px'); 
+        parent.css('height','25%'); 
+    }).mouseleave((event)=>{
+        var tar = $(event.target);
+        tar.css('width','150px'); 
+        var parent = $(event.target).parent();
+        parent.css('width','150px'); 
+        parent.css('height','20%'); 
     }) ;
 
     $("#content").click(function(event){
@@ -40,6 +52,15 @@ $(document).ready(function(){
         var width = tar.offsetX ;
         var height = tar.offsetY ;
         console.log(width +"," +height) ;
+
+        var picIn = '<div class="item active">\
+            <img alt="图片暂时无法显示" src="pic/index.jpg" style="height:500px;width:100%"></div>\
+            <div class="item">\
+                <img alt="图片暂时无法显示" src="pic/index.jpg" style="height:500px;width:100%"></div>\
+            <div class="item">\
+                <img alt="图片暂时无法显示" src="pic/index.jpg" style="height:500px;width:100%"></div>';
+        $('.carousel-inner').html(picIn);
+
     }) ;
 
     //播放音乐
@@ -66,15 +87,15 @@ var info = {
         "developMain.jpg"
     ],
     image1: [
-        "music.jpg",
-        "dance.jpg",
+        "muyeqingge.jpg",
+        "dance4.jpg",
         "history.jpg",
-        "girl.jpg",
-        "boy.jpg",
+        "tujianvhai.jpg",
+        "tujianan.jpg",
         "map.jpg",
-        "eat.jpg",
-        "drink.jpg",
-        "house.jpg",
+        "nuomi.jpg",
+        "tujiajiu.jpg",
+        "diaojiaolou.jpg",
         "marry.jpg",
         "work.jpg",
         "taboo.jpg",
@@ -90,6 +111,31 @@ var info = {
     ]
 };
 
+(()=>{
+        /*var modal = 
+        '<div id="morePics" class="modal fade", tabIndex="-1" , role="dialog" , aria-labelledby="myWordsLabel" , aria-hidden="false">\
+            <div class="modal-dialog">\
+                <div class="modal-content">\
+                    <div class="row-fluid">\
+                        <div class="span12">\
+                            <div class="carousel slide" id="pics">\
+                                <ol class="carousel-indicators">\
+                                    <li class="active" data-slide-to="0" data-target="#pics"></li>\
+                                    <li data-slide-to="1" data-target="#pics"></li>\
+                                    <li data-slide-to="2" data-target="#pics"></li></ol>\
+                                <div class="carousel-inner">\
+                                    <div class="item active">\
+                                        <img alt="" src="pic/index.jpg" /></div>\
+                                    <div class="item">\
+                                        <img alt="" src="pic/index.jpg" /></div>\
+                                    <div class="item">\
+                                        <img alt="" src="pic/index.jpg" /></div>\
+                                </div>\
+                                <a data-slide="prev" href="#pics" class="left carousel-control">‹</a>\
+                                <a data-slide="next" href="#pics" class="right carousel-control">›</a>\
+                            </div></div></div></div></div>';
+        $('#content').append(modal);*/
+})();
 //click
 function changeInfo(event){
     var tar = event.target.parentNode ;
@@ -148,7 +194,7 @@ function addIframe(frame,pa,myHtml,img,index){
         //frame.src = '/specify_info' ;
         console.log(img.src) ;
         //frame.setAttribute("frameborder","0") ;
-        $(frame).css("height","500px") ;
+        $(frame).css("height","400px") ;
         pa.appendChild(frame) ;
 
         //获取具体的信息
@@ -158,7 +204,7 @@ function addIframe(frame,pa,myHtml,img,index){
             asyns: false,
             success: function (response) {
                 var info = JSON.parse( JSON.stringify(response) ) ;
-                //alert( info.info1) ;
+                // alert( info.info3) ;
                 $(frame).html(info.info1) ;
             },
             error: function (response) {

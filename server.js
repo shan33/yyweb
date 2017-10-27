@@ -2,25 +2,22 @@ var express = require('express') ;						//express
 var body_parser = require('body-parser') ;				//body-parser
 //var file = require('fs') ;
 var url = require('url') ;
-var sql = require('mysql') ;							//mysql
 var path = require('path') ;							//path
 var async = require('async') ;                          //async
 var session = require('express-session') ;              //session
 var cookieParser = require('cookie-parser') ;          //cookie-parser
 
-/*链接数据库 yyweb数据库*/
-var mydatabase = sql.createConnection({
-	host: 'localhost',
-	user: 'root',
-	password: 'xulanshan',
-	database: 'yyweb'
-}) ;
 
-mydatabase.connect() ;
 
 /*自定义模块导入*/
 var user = require('./modules/user1') ;
 var speInfo = require('./modules/specificInfo') ;
+var mydatabase = require('./modules/mysql') ;
+
+
+/*数据库连接*/
+// mydatabase.connect() ;
+
 
 /*express设置*/
 var app = express() ;
@@ -43,14 +40,13 @@ console.log("服务器开启：　"+ port) ;
 
 /*路由设置*/
 app.get('/',function(req,res){              //主页面
-    // console.log("server.js--主页面请求") ;
     async.waterfall([
         //查询
         function(callback){
             mydatabase.query( user.findUserQuery, function(err,result){
                 var resu = result.length ;
                 callback(err,resu) ;
-            } ) ;
+            } ) ;0
         }
     ],function(err,personNumber){
         if(err)
@@ -76,7 +72,6 @@ app.post('/login',function(req,res){
         //查询
         function(callback){
             mydatabase.query( user.searchUserQuery, [req.body.name,req.body.pass] , function(err,result){
-                console.log("登录") ;
                 if(result == null || result=='' )
                     callback(null, 0) ;
                 else{
@@ -139,7 +134,7 @@ app.post('/logout',function(req,res){
 }) ;
 /*发帖*/
 app.post('/post',function(req,res){
-    //console.log("发帖信息： " + req.body.user +" : " +req.body.time +" -- " + req.body.title) ;
+    // console.log("发帖信息： " + req.body.user +" : " +req.body.time +" -- " + req.body.title) ;
     if( req.session.Cookie) {
         var message = {
             user: req.session.Cookie.id,
@@ -151,10 +146,10 @@ app.post('/post',function(req,res){
             //查询
             function (callback) {
                 mydatabase.query(user.postMessageQuery, [message.user, message.title, message.content, message.time], function (err, result) {
-                    //console.log("发帖") ;
                     if (result == null || result == '')
                         callback(null, 0);
                     else {
+                        console.log(req.body.user);
                         callback(null, req.body.user);
                     }
                 });
@@ -178,7 +173,7 @@ app.post('/post',function(req,res){
 }) ;
 /*获取帖子信息*/
 app.get('/getPosts',function(req,res){
-    console.log("获取帖子信息") ;
+    // console.log("获取帖子信息") ;
     async.waterfall([
         //查询
         function(callback){
@@ -194,7 +189,7 @@ app.get('/getPosts',function(req,res){
     ],function(err,info){
         if(err) {
             console.log(err);
-            res.send('0') ;
+            res.send('0 ') ;
         }else{
             console.log( "查询帖子成功-- " ) ;
             res.send(info) ;
@@ -268,15 +263,16 @@ app.get('/getComments',function(req,res){
 //获取文化界面具体信息
 app.get('/spe_info',function(req,res){
     var info_index = req.query.index ;
+    console.log( speInfo.infoIndex[info_index] );
     res.send(  speInfo[(speInfo.infoIndex[info_index])] ) ;
 }) ;
 
-app.get('/admin:id',function(){             //用户登录的页面
+/*app.get('/admin:id',function(){             //用户登录的页面
 
 }) ;
 
 
-
+*/
 
 /*页面跳转*/
 app.get('/culture',function(req,res){		//跳转culture页面
@@ -332,7 +328,6 @@ app.get('/self_info',function(req,res){		//talking
                     function (callback) {
                         if (queryMean == 'info') {
                             mydatabase.query(user.getSelfPostQuery, [userID], function (err, result) {
-                                console.log("个人发帖") ;
                                 if (result == null || result == '')
                                     callback(null, {
                                         name: "info",
@@ -348,7 +343,6 @@ app.get('/self_info',function(req,res){		//talking
                             });
                         }else{
                             mydatabase.query(user.getSelfMessageQuery, [userID], function (err, result) {
-                                console.log("个人消息") ;
                                 if (result == null || result == '')
                                     callback(null, {
                                         name: "message",

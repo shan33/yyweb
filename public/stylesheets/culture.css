@@ -38,13 +38,12 @@ body{
     width: 80%;
     height: 600px;
     border: solid 2px #5a5a5a;
-
 }
 #content{
     position: absolute;
-    margin: 4% 15%;
-    width: 750px;
-    height: 480px;
+    margin: 3% 3%;
+    width: 950px;
+    height: 500px;
     border: solid 4px #0D3349;
 }
 .tab-pane span{

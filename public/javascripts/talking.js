@@ -19,6 +19,7 @@ function init(){
         var my_content = document.getElementById("my-content").value ;
         var my_user = 1 ;
         var my_time =  getTime() ;
+        alert(my_time);
         $.ajax({
             url: 'http://127.0.0.1:8080/post' ,
             type: 'post',
@@ -209,5 +210,5 @@ function otherCommentShow(obj){
 //获取时间
 function getTime(){
     var time = new Date() ;
-    return time.getFullYear() +"-" +time.getMonth() +"-" +time.getDay() +" " +time.getHours() +":" +time ;
+    return time.getFullYear() +"-" + (time.getMonth()+1 ) +"-" +time.getDay() +" " +time.getHours() +":" +time.getMinutes() + ":" + time.getSeconds() ;
 }

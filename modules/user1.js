@@ -26,8 +26,11 @@ var user = {
 
     //发帖
     postMessageQuery: 'INSERT INTO ' + mybase.databases.post +' (POST_USER,TITLE,CONTENT,TIME) VALUES (?,?,?,?)',
+    postMessageQueryWithTag: 'INSERT INTO ' + mybase.databases.post +' (POST_USER,TAG,TITLE,CONTENT,TIME) VALUES (?,?,?,?,?)',
     getTotalMessageQuery: 'SELECT post.ID,post.POST_USER,post.TITLE,post.CONTENT,post.TIME,user.NAME FROM ' +mybase.databases.post
                             +' post,' +mybase.databases.user +' user WHERE post.POST_USER=user.id',
+    getTotalMessageQueryWithTag: 'SELECT post.ID,post.POST_USER,post.TITLE,post.CONTENT,post.TIME, post.TAG,user.NAME FROM ' +mybase.databases.post
+                            +' post,' +mybase.databases.user +' user WHERE post.POST_USER=user.id AND TAG=?',
     getSomeoneMessageQuery: 'SELECT * FROM ' +mybase.databases.post +" WHERE ID=(?)",
 
     //评论

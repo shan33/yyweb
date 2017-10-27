@@ -57,8 +57,6 @@ app.get('/',function(req,res){              //主页面
             title: 'xls'
         }) ;
     })
-
-
 }) ;
 
 /*页面跳转*/
