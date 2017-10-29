@@ -84,16 +84,17 @@ block content
                 li
                     a( href='#two' , data-toggle='tab' ) 其他
                 li
-                    a( href='#four' , data-toggle='tab' ) 交流
+                    a( href='#three' , data-toggle='tab' ) 交流
             .tab-content.well.well-lg
                 #one.tab-pane.fade.in.active
 
                 #two.tab-pane.fade
                     label.label.label-primary 显示有关的信息来源
 
-                #four.tab-pane.fade
+                #three.tab-pane.fade
                     a.btn.btn-default( href="#mySug" , data-toggle="modal" ) 说出你的想法
-                    iframe(  src="/talking" , frameborder="0" )
+                    hr
+                    div
 
     #mySug.modal.fade( tabindex="-1" , role="dialog" , aria-labelledby="myModalLabel" , aria-hidden="true" )
         .modal-dialog
@@ -105,4 +106,4 @@ block content
                     .form-group
                         textarea#title.form-control( name="title" , placeholder="输入您的内容" )
                     .form-group
-                        input.btn.btn-default( type="submit" , value="提交" )
+                        input.btn.btn-default( type="button" , value="提交" onclick="sug()")

@@ -134,18 +134,19 @@ app.post('/logout',function(req,res){
 }) ;
 /*发帖*/
 app.post('/post',function(req,res){
-    // console.log("发帖信息： " + req.body.user +" : " +req.body.time +" -- " + req.body.title) ;
+    console.log("发帖信息： " + req.body.user +" : " +req.body.time +" -- " + req.body.title) ;
     if( req.session.Cookie) {
         var message = {
             user: req.session.Cookie.id,
             time: req.body.time,
+            tag: req.body.tag,
             title: req.body.title,
             content: req.body.content
         };
         async.waterfall([
             //查询
             function (callback) {
-                mydatabase.query(user.postMessageQuery, [message.user, message.title, message.content, message.time], function (err, result) {
+                mydatabase.query(user.postMessageQueryWithTag, [message.user, message.tag, message.title, message.content, message.time], function (err, result) {
                     if (result == null || result == '')
                         callback(null, 0);
                     else {
@@ -162,7 +163,6 @@ app.post('/post',function(req,res){
                 console.log("发帖失败");
                 res.send('0');
             } else {
-                //console.log( "发帖成功-- " +myuser) ;
                 res.send('1');
             }
         })
@@ -264,7 +264,19 @@ app.get('/getComments',function(req,res){
 app.get('/spe_info',function(req,res){
     var info_index = req.query.index ;
     console.log( speInfo.infoIndex[info_index] );
-    res.send(  speInfo[(speInfo.infoIndex[info_index])] ) ;
+    mydatabase.query(user.getTotalMessageQueryWithTag,[(info_index+1)],function (error,result) {
+                if(result == null || result=='' ) {
+                    res.send( {
+                        info: speInfo[(speInfo.infoIndex[info_index])],
+                        talks: ''
+                    }) ;
+                } else{
+                    res.send({
+                        info: speInfo[(speInfo.infoIndex[info_index])],
+                        talks: result
+                    });
+                }
+    }) ;
 }) ;
 
 /*app.get('/admin:id',function(){             //用户登录的页面
@@ -317,8 +329,8 @@ app.get('/self_info',function(req,res){		//talking
                 //myInfo: '暂无新的消息'
             });
         }
-        /*else
-         res.send('0');*/
+        else
+            res.send('0');
     }else{
         if( req.session.Cookie) {
             var userID = req.session.Cookie.id;

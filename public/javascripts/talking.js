@@ -26,6 +26,7 @@ function init(){
             data: {
                 title: my_title,
                 content: my_content,
+                tag: 0,
                 time: my_time,
                 user: my_user
             },
@@ -33,8 +34,10 @@ function init(){
             success: function (response) {
                 if(response == 1) {
                     alert("发表成功！");
-                    $('#myWords').modal('hide');
+                } else {
+                    alert('请先登录');
                 }
+                $('#myWords').modal('hide');
             },
             error: function () {
                 alert("发表失败") ;
@@ -73,10 +76,10 @@ function showInfo(d){
     else
         post_index=0;
     var pages = 0;
-    if (posts.length % 7 == 0 && mes.length > 7)
-        pages = posts.length % 7;
+    if (posts.length / 7 == 0 && posts.length > 7)
+        pages = posts.length / 7;
     else
-        pages = posts.length % 7;
+        pages = Math.ceil(posts.length / 7);
     // 0-6,  7-13
     if( (post_index) != pages && post_index>=0) {
         $('#stickies').empty() ;

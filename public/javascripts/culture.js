@@ -1,3 +1,6 @@
+var index;
+var pageCount = 7;
+var pics = [];
 $(document).ready(function(){
     $('.choose:first-child').mouseenter(function(){
         // console.log('mouseenter label') ;
@@ -52,13 +55,23 @@ $(document).ready(function(){
         var width = tar.offsetX ;
         var height = tar.offsetY ;
         console.log(width +"," +height) ;
-
-        var picIn = '<div class="item active">\
-            <img alt="图片暂时无法显示" src="pic/index.jpg" style="height:500px;width:100%"></div>\
-            <div class="item">\
-                <img alt="图片暂时无法显示" src="pic/index.jpg" style="height:500px;width:100%"></div>\
-            <div class="item">\
-                <img alt="图片暂时无法显示" src="pic/index.jpg" style="height:500px;width:100%"></div>';
+        if (pics.length == 0) {
+            alert( '亲爱的，图片还在选取中，现在显示是测试图片哦~');
+            pics.push('girl');
+            pics.push('boy');
+            pics.push('girl');
+            pics.push('boy');
+        }
+        var picIn = '';
+        for (var i = 0; i < pics.length; i++) {
+            if (i == 0) {
+                 picIn += '<div class="item active">\
+            <img alt="图片暂时无法显示" src="pic/' +pics[i] +'.jpg" style="height:500px;width:100%"></div>';
+            } else {
+                 picIn += '<div class="item">\
+            <img alt="图片暂时无法显示" src="pic/' +pics[i] +'.jpg" style="height:500px;width:100%"></div>';
+            } 
+        }
         $('.carousel-inner').html(picIn);
 
     }) ;
@@ -111,41 +124,17 @@ var info = {
     ]
 };
 
-(()=>{
-        /*var modal = 
-        '<div id="morePics" class="modal fade", tabIndex="-1" , role="dialog" , aria-labelledby="myWordsLabel" , aria-hidden="false">\
-            <div class="modal-dialog">\
-                <div class="modal-content">\
-                    <div class="row-fluid">\
-                        <div class="span12">\
-                            <div class="carousel slide" id="pics">\
-                                <ol class="carousel-indicators">\
-                                    <li class="active" data-slide-to="0" data-target="#pics"></li>\
-                                    <li data-slide-to="1" data-target="#pics"></li>\
-                                    <li data-slide-to="2" data-target="#pics"></li></ol>\
-                                <div class="carousel-inner">\
-                                    <div class="item active">\
-                                        <img alt="" src="pic/index.jpg" /></div>\
-                                    <div class="item">\
-                                        <img alt="" src="pic/index.jpg" /></div>\
-                                    <div class="item">\
-                                        <img alt="" src="pic/index.jpg" /></div>\
-                                </div>\
-                                <a data-slide="prev" href="#pics" class="left carousel-control">‹</a>\
-                                <a data-slide="next" href="#pics" class="right carousel-control">›</a>\
-                            </div></div></div></div></div>';
-        $('#content').append(modal);*/
-})();
+
 //click
 function changeInfo(event){
     var tar = event.target.parentNode ;
-    var index_tar = $(tar).index() ;
+    index = $(tar).index() ;
     $("#left").animate({"background":"#eee"}) ;
     var pa = document.getElementById("one") ;
     var frame = document.createElement('div') ;
     frame.class = 'well well-lg infoOne' ;
     var img = $("#right img") ;
-    addIframe( frame,pa, (index_tar+1),img,index_tar) ;
+    addIframe( frame,pa, (index+1),img,index) ;
 
 }
 function addIframe(frame,pa,myHtml,img,index){
@@ -201,11 +190,21 @@ function addIframe(frame,pa,myHtml,img,index){
         $.ajax({
             url: 'http://127.0.0.1:8080/spe_info?index=' +index,
             type: 'GET',
-            asyns: false,
             success: function (response) {
                 var info = JSON.parse( JSON.stringify(response) ) ;
                 // alert( info.info3) ;
-                $(frame).html(info.info1) ;
+                $(frame).html(info.info.info1) ;
+                var talks = JSON.parse(JSON.stringify(info.talks));
+                var content = '';
+                if (talks === '') 
+                    content += '<pre>no more information~</pre>';
+                else {
+                    for (var i = 0; i < talks.length; i++) {
+                        content += '<pre>' +talks[i].NAME +":  " +talks[i].CONTENT + '</pre>'
+                    }
+                }
+                $('#three div').empty().append(content);
+
             },
             error: function (response) {
 
@@ -231,6 +230,34 @@ var createNewImage = function(father,itId,coords,pic,content){
     }
 }
 //hover
-function hoverInfo(event){
+function sug(){
+    $.ajax({
+            url: 'http://127.0.0.1:8080/post' ,
+            type: 'post',
+            data: {
+                title: 'none',
+                content: $('#title').val(),
+                tag: (index+1),
+                time: getTime
+            },
+            async: false,
+            success: function (response) {
+                if(response == 1) {
+                    alert("发表成功！");
+                } else{
+                    alert('请先登录');
+                }
+                $('#mySug').modal('hide');
+            },
+            error: function () {
+                alert("发表失败") ;
+            }
+            
+        }) ;
+}
 
+//获取时间
+function getTime(){
+    var time = new Date() ;
+    return time.getFullYear() +"-" + (time.getMonth()+1 ) +"-" +time.getDay() +" " +time.getHours() +":" +time.getMinutes() + ":" + time.getSeconds() ;
 }
