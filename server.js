@@ -279,13 +279,6 @@ app.get('/spe_info',function(req,res){
     }) ;
 }) ;
 
-/*app.get('/admin:id',function(){             //用户登录的页面
-
-}) ;
-
-
-*/
-
 /*页面跳转*/
 app.get('/culture',function(req,res){		//跳转culture页面
     // console.log("server.js--跳转vacation页面请求") ;

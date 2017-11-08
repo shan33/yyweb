@@ -1,7 +1,13 @@
 var index;
 var pageCount = 7;
 var pics = [];
+var coords = [];
+var content = null;
+
+
 $(document).ready(function(){
+    $('[data-toggle="popover"]').popover();
+
     $('.choose:first-child').mouseenter(function(){
         // console.log('mouseenter label') ;
         $(this).css('backgroundColor','#ccc') ;
@@ -57,10 +63,8 @@ $(document).ready(function(){
         console.log(width +"," +height) ;
         if (pics.length == 0) {
             alert( '亲爱的，图片还在选取中，现在显示是测试图片哦~');
-            pics.push('girl');
-            pics.push('boy');
-            pics.push('girl');
-            pics.push('boy');
+            pics.push('test1');
+            pics.push('test2');
         }
         var picIn = '';
         for (var i = 0; i < pics.length; i++) {
@@ -102,15 +106,15 @@ var info = {
     image1: [
         "muyeqingge.jpg",
         "dance4.jpg",
-        "history.jpg",
-        "tujianvhai.jpg",
+        "historyPic.png",
+        "tujianv.jpg",
         "tujianan.jpg",
         "map.jpg",
-        "nuomi.jpg",
+        "eat3.jpg",
         "tujiajiu.jpg",
-        "diaojiaolou.jpg",
-        "marry.jpg",
-        "work.jpg",
+        "houseMain.jpg",
+        "marryMain.jpg",
+        "workMain.jpg",
         "taboo.jpg",
         "communicate.jpg",
         "develop.jpg"
@@ -120,7 +124,7 @@ var info = {
         "dance": []
     },
     coords: [
-        "459,357,467,359,477,355,497,352,491,346,498,353,502,354,507,353,509,352,510,352,514,354,520,351,532,351,539,345,548,336,543,332,553,324,557,323,566,323,567,328,565,328,570,334,570,339,579,343,584,344,587,352,599,353,592,370,564,390,559,392,554,396,546,400,548,402,531,402,518,413,512,418,509,431,498,433,494,429,497,418,496,411,501,402,485,401,462,394,461,391,466,382,458,361"
+        // "459,357,467,359,477,355,497,352,491,346,498,353,502,354,507,353,509,352,510,352,514,354,520,351,532,351,539,345,548,336,543,332,553,324,557,323,566,323,567,328,565,328,570,334,570,339,579,343,584,344,587,352,599,353,592,370,564,390,559,392,554,396,546,400,548,402,531,402,518,413,512,418,509,431,498,433,494,429,497,418,496,411,501,402,485,401,462,394,461,391,466,382,458,361"
     ]
 };
 
@@ -129,6 +133,16 @@ var info = {
 function changeInfo(event){
     var tar = event.target.parentNode ;
     index = $(tar).index() ;
+    if (index == 0) {
+        $('audio').css('display','block');
+        alert('点击右边 audio按钮可以播放歌曲哦~');
+    } else if(index == 9){
+        alert('点击右边 切换按钮可以播放视频哦~');
+        $('aside a:last-child').css('display','block');
+    } else {
+        $('audio').css('display','none');
+        $('aside a:last-child').css('display','none');
+    }
     $("#left").animate({"background":"#eee"}) ;
     var pa = document.getElementById("one") ;
     var frame = document.createElement('div') ;
@@ -148,41 +162,22 @@ function addIframe(frame,pa,myHtml,img,index){
         newImg.src = "/pic/" +info.image1[index];
         newImg.style.height = "100%" ;
         newImg.style.width = "100%" ;
-        var content = document.getElementById("content") ;
+        content = document.getElementById("content");
+
         if( !($("#content embed") === null ))
             $("#content embed").remove() ;
         if( !(index==info.image1.length-1) ){
-            if(index == 5){
-                console.log("map") ;
-                var hotMap = document.createElement("map") ;
-                var area = document.createElement("area") ;
-                area.shape = "poly" ;
-                area.coords = info.coords[0] ;
-                area.href = "#" ;
-                area.dataPlacement = "left" ;
-                area.dataContent = "<h4>酉阳</h4>" ;
-                area.dataToggle = "popover" ;
-                area.dataContainer = "body" ;
-                area.alt = "酉阳" ;
-                hotMap.appendChild(area) ;
-                newImg.appendChild(hotMap) ;
-                console.log("map添加成功") ;
-            }
-            content.appendChild(newImg) ;
+            if (content.childNodes.length > 0) 
+                $(content).empty();
+                content.appendChild(newImg) ;
+
         } else{
             var video = document.createElement("embed") ;
             video.width = "100%";
             video.height = "100%" ;
-            video.src="video/老家.mp4" ;
-           // var source = document.createElement("source") ;
-           // source.src = "video/花轿婚假.mp4" ;
-           // source.type = "video/mp4" ;
-           // video.appendChild(source) ;
+            video.src="video/花轿婚假.mp4" ;
             content.appendChild(video) ;
         }
-        //frame.src = '/specify_info' ;
-        console.log(img.src) ;
-        //frame.setAttribute("frameborder","0") ;
         $(frame).css("height","400px") ;
         pa.appendChild(frame) ;
 
@@ -191,19 +186,35 @@ function addIframe(frame,pa,myHtml,img,index){
             url: 'http://127.0.0.1:8080/spe_info?index=' +index,
             type: 'GET',
             success: function (response) {
+
                 var info = JSON.parse( JSON.stringify(response) ) ;
-                // alert( info.info3) ;
+                coords = info.info.coords;
+                
+                if (coords != null) {
+                    for (var i = 0; i < coords.length; i++) {
+                        var temp = document.createElement('div');
+                        $(content).append('<div class="popo" title="' +'<h3>'+coords[i][2] + '</h3><hr>'+ coords[i][3] 
+                                            + '" style="left:' +coords[i][0] + 'px' +';top:' +coords[i][1]+'px' + ';" ></div>');
+                    }
+                        $('.popo').popover({
+                            container: 'body',
+                            trigger: 'hover',
+                            placement: 'right',
+                            html: true
+                        });
+                }
                 $(frame).html(info.info.info1) ;
+                pics = info.info.pic;
                 var talks = JSON.parse(JSON.stringify(info.talks));
-                var content = '';
+                var con = '';
                 if (talks === '') 
-                    content += '<pre>no more information~</pre>';
+                    con += '<pre>没有多余的消息哦 ~</pre>';
                 else {
                     for (var i = 0; i < talks.length; i++) {
-                        content += '<pre>' +talks[i].NAME +":  " +talks[i].CONTENT + '</pre>'
+                        con += '<pre>' +talks[i].NAME +":  " +talks[i].CONTENT + '</pre>'
                     }
                 }
-                $('#three div').empty().append(content);
+                $('#three div').empty().append(con);
 
             },
             error: function (response) {
@@ -213,22 +224,6 @@ function addIframe(frame,pa,myHtml,img,index){
 
 }
 
-/**创建图片以及热点对象
- * father: 父集元素
- * id：    此图片的id
- * coords：热点的区域坐标范围
- * pic：   图片
- * content：热点的内容 {title,content}
- * */
-var createNewImage = function(father,itId,coords,pic,content){
-    this.father = father ;
-    this.id = itId ;
-    this.coords = coords ;
-    this.content = content ;
-    this.init = function(){
-        
-    }
-}
 //hover
 function sug(){
     $.ajax({
@@ -260,4 +255,25 @@ function sug(){
 function getTime(){
     var time = new Date() ;
     return time.getFullYear() +"-" + (time.getMonth()+1 ) +"-" +time.getDay() +" " +time.getHours() +":" +time.getMinutes() + ":" + time.getSeconds() ;
+}
+
+var turn = true;
+function playVideo() {
+    if (turn) {
+        $('#content').empty();
+        var video = document.createElement("embed") ;
+                video.width = "100%";
+                video.height = "100%" ;
+                video.src="video/花轿婚假.mp4" ;
+                content.appendChild(video) ;
+        turn = false;
+    } else {
+        $('#content').empty();
+        var newImg = document.createElement("img") ;
+        newImg.src = "/pic/" +info.image1[index];
+        newImg.style.height = "100%" ;
+        newImg.style.width = "100%" ;
+        content.appendChild(newImg);
+        turn = true;
+    }
 }
