@@ -107,10 +107,10 @@ var info = {
         "muyeqingge.jpg",
         "dance4.jpg",
         "historyPic.png",
-        "tujianv.jpg",
-        "tujianan.jpg",
+        "woman.jpg",
+        "man.jpg",
         "map.jpg",
-        "eat3.jpg",
+        "larou.jpg",
         "tujiajiu.jpg",
         "houseMain.jpg",
         "marryMain.jpg",
@@ -123,9 +123,6 @@ var info = {
         "music": [],
         "dance": []
     },
-    coords: [
-        // "459,357,467,359,477,355,497,352,491,346,498,353,502,354,507,353,509,352,510,352,514,354,520,351,532,351,539,345,548,336,543,332,553,324,557,323,566,323,567,328,565,328,570,334,570,339,579,343,584,344,587,352,599,353,592,370,564,390,559,392,554,396,546,400,548,402,531,402,518,413,512,418,509,431,498,433,494,429,497,418,496,411,501,402,485,401,462,394,461,391,466,382,458,361"
-    ]
 };
 
 
@@ -192,9 +189,11 @@ function addIframe(frame,pa,myHtml,img,index){
                 
                 if (coords != null) {
                     for (var i = 0; i < coords.length; i++) {
+                        var c = coords[i];
                         var temp = document.createElement('div');
-                        $(content).append('<div class="popo" title="' +'<h3>'+coords[i][2] + '</h3><hr>'+ coords[i][3] 
-                                            + '" style="left:' +coords[i][0] + 'px' +';top:' +coords[i][1]+'px' + ';" ></div>');
+                        $(content).append('<div class="popo" title="' +'<h3>'+c[4] + '</h3><hr>'+ c[5] 
+                                            + '" style="left:' +c[0] + 'px;top:' 
+                                            + c[1]+'px;width:'+c[2] +'px;height:' +c[3]+'px;"></div>');
                     }
                         $('.popo').popover({
                             container: 'body',
@@ -258,7 +257,7 @@ function getTime(){
 }
 
 var turn = true;
-function playVideo() {
+function playVideo(name) {
     if (turn) {
         $('#content').empty();
         var video = document.createElement("embed") ;
