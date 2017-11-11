@@ -65,13 +65,13 @@ body{
     position: fixed;
     width: 50px;
     height: auto;
-    margin: 10% 75%;
+    margin: 5% 75%;
     /*border: solid 2px saddlebrown;*/
     z-index: 10;
 }
 .choose{
     padding: 6px;
-    margin: 50% auto;
+    margin: 30% auto;
     background: #8a6d3b;
 }
 #right a[name=art]{

@@ -276,3 +276,13 @@ function playVideo(name) {
         turn = true;
     }
 }
+
+//自定义重点
+function drawMyImportance(){
+    if(confirm("在图片上划出自己的重点发送给我们哦~点击取消可以放弃")) {
+        //画图
+        var canvas = document.getElementsByTagName('canvas')[0];
+        var context = canvas.getContext('2d');
+
+    }
+}
