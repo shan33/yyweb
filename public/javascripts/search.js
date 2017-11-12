@@ -101,7 +101,7 @@ function addInfo(res,obj){
                         "<p><b>我</b> 发表了 ---- (&nbsp;&nbsp;<small>" +response.TIME +"</small>)</p><hr>" +
                             "<p>" +response.CONTENT  +"</p><br>" +
                             "<a class='commit'>移动到这里获取评论</a> " +
-                            "<a>获赞</a><small>10</small>" +
+                            // "<a>获赞</a><small>10</small>" +
                             "<label style='visibility: hidden'>" +response.ID +"</label>" +
                             "</div><ul></ul></li>");
     }

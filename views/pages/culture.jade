@@ -74,10 +74,11 @@ block content
                     source( src="sound/木叶情歌.mp3" type="audio/mpeg" )
                 a( href="/")
                     label.choose 主页
-                a( href="#" onclick='playVideo()')
-                    label.choose 切换视频
                 a( href="#" onclick="drawMyImportance()")
                     label.choose 定义重点
+                a( href="#" onclick='playVideo()' style="display:none;")
+                    label.choose 切换视频
+                
 
         #art.tab_div
             ul#info-tab.nav.nav-tabs

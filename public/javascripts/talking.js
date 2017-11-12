@@ -34,6 +34,7 @@ function init(){
             success: function (response) {
                 if(response == 1) {
                     alert("发表成功！");
+                    location.reload();
                 } else {
                     alert('请先登录');
                 }
@@ -169,8 +170,10 @@ function myComment(obj){
                 alert( "请先登录");
             else if(response != 1)
                 alert("评论失败") ;
-            else
+            else{
+                location.reload();
                 alert("评论成功") ;
+            }
         },
         error: function () {
             alert("评论失败") ;
