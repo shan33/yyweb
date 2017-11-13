@@ -1,4 +1,4 @@
-var index;
+var index = 100;
 var pageCount = 7;
 var pics = [];
 var coords = [];
@@ -133,9 +133,11 @@ function changeInfo(event){
     if (index == 0) {
         $('audio').css('display','block');
         alert('点击右边 audio按钮可以播放歌曲哦~');
+
     } else if(index == 9){
         alert('点击右边 切换按钮可以播放视频哦~');
         $('aside a:last-child').css('display','block');
+
     } else {
         $('audio').css('display','none');
         $('aside a:last-child').css('display','none');
@@ -144,10 +146,10 @@ function changeInfo(event){
     var pa = document.getElementById("one") ;
     var frame = document.createElement('div') ;
     frame.class = 'well well-lg infoOne' ;
-    var img = $("#right img") ;
+    var img = $("#right > img") ;
     addIframe( frame,pa, (index+1),img,index) ;
-
 }
+
 function addIframe(frame,pa,myHtml,img,index){
         //删除原有数据
         if(pa.firstChild !== null){
@@ -170,7 +172,7 @@ function addIframe(frame,pa,myHtml,img,index){
 
         } else{
             var video = document.createElement("embed") ;
-            video.width = "100%";
+            video.width = "100%" ;
             video.height = "100%" ;
             video.src="video/花轿婚假.mp4" ;
             content.appendChild(video) ;
@@ -183,7 +185,6 @@ function addIframe(frame,pa,myHtml,img,index){
             url: 'http://127.0.0.1:8080/spe_info?index=' +index,
             type: 'GET',
             success: function (response) {
-
                 var info = JSON.parse( JSON.stringify(response) ) ;
                 coords = info.info.coords;
                 
@@ -279,11 +280,53 @@ function playVideo(name) {
 
 //自定义重点
 function drawMyImportance(){
-    if(confirm("在图片上划出自己的重点发送给我们哦~点击取消可以放弃")) {
-        //画图
-        var canvas = document.getElementsByTagName('canvas')[0];
-        var context = canvas.getContext('2d');
-        
+    if (index != 100)
+        $('#tip').css('visibility','visible');
+    alert('请将下面的小花花移动到你想要了解的内容上面就可以了哦');
+    
+}
+function drag(event){
+    event.dataTransfer.setData('Text', event.target.id);
+}
+function drop(event){
+    event.preventDefault();
+    console.log('begin');
 
-    }
+    var data = event.dataTransfer.getData("Text");
+
+    var rect = document.createElement('div');
+    $(rect).css('position','absolute');
+    $(rect).css('left',(event.offsetX-50) + 'px');
+    $(rect).css('top',(event.offsetY-50) + 'px');
+    $(rect).css('width', '150px');
+    $(rect).css('height', '100px');
+    $(rect).css('background', 'gray');
+    $('#content').append(rect);
+
+    setTimeout(function(){
+        var tip = prompt('您已经选择了区域，请输入您想要了解的信息(可以附上你的联系方式哦~)','');
+        // alert('您输入的信息： ' + tip);
+        $.ajax({
+            url: 'http://127.0.0.1:8080/other/tip',
+            type: 'post',
+            data: {
+                tag: index+1,
+                x: event.offsetX,
+                y: event.offsetY,
+                info: tip,
+                time: getTime()
+            },
+            success: function (response) {
+                if (response == 1) 
+                    alert('提交成功，感谢您的支持，我们会尽快处理的呢~');
+                else
+                    alert('请先登录');
+            }
+        });
+    },500);
+    
+
+}
+function dropDown(event){
+    event.preventDefault();
 }

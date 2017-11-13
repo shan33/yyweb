@@ -43,7 +43,10 @@ var user = {
     findUserNameQuery: 'SELECT NAME FROM ' +userTable +' WHERE ID=(?)' ,
     getSelfMessageQuery: 'SELECT com.COMMIT_CONTENT,com.SEND_FROM,com.POST_ID,user.NAME,com.TIME,p.CONTENT FROM ' +mybase.databases.comment +' com, '+
                          mybase.databases.user+ ' user,' +mybase.databases.post +' p WHERE p.ID=com.POST_ID AND com.IF_READ=0 AND com.SEND_TO=user.ID AND user.ID=(?)',
-    getSelfPostQuery: 'SELECT p.*,u.NAME FROM ' +mybase.databases.post + " p," + mybase.databases.user +" u WHERE p.POST_USER=u.ID AND u.ID=(?)"
+    getSelfPostQuery: 'SELECT p.*,u.NAME FROM ' +mybase.databases.post + " p," + mybase.databases.user +" u WHERE p.POST_USER=u.ID AND u.ID=(?)",
+    
+    //提交申请
+    getOtherTip: 'INSERT INTO TIP (PERSON_ID, TIME, TAG, X, Y, INFO) VALUES (?,?,?,?,?,?)'
 } ;
 
 module.exports = user ;

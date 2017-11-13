@@ -375,7 +375,35 @@ app.get('/self_info',function(req,res){		//talking
             res.redirect('/');
     }
 });
-app.get('/self_info',function(req,res){		//talking
 
+//提交申请
+app.post('/other/tip',function(req,res){		
+    console.log('tips');
+    if(req.session.Cookie){
+        
+        async.waterfall([
+            function (callback) {
+                var userID = req.session.Cookie.id;
+                mydatabase.query(user.getOtherTip, [userID, req.body.time, req.body.tag, req.body.x, req.body.y, req.body.info], function (err, result) {                    if (result == null || result == '')
+                        callback(null, 0);
+                    else {
+                        console.log(req.body.user);
+                        callback(null, req.body.user);
+                    }
+                });
+            }
+            ], function (err, myuser) {
+                if (err) {
+                    console.log(err);
+                    res.send('0');
+                } else if (myuser == 0) {
+                    console.log("提交失败");
+                    res.send('0');
+                } else {
+                    res.send('1');
+                }
+            })
+    }else
+        res.send('0');
 
 }) ;

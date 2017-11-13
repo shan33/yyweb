@@ -69,6 +69,17 @@ var  travelTable= "CREATE TABLE TRAVEL_TEAM (\
     PRIMARY KEY(ID)\
 )";
 
+var tipTable = "CREATE TABLE TIP(\
+    ID INT(4) NOT NULL AUTO_INCREMENT,\
+    PERSON_ID INT(11) NOT NULL,\
+    TIME DATETIME NOT NULL,\
+    TAG INT DEFAULT 0,\
+    X INT(4) NOT NULL,\
+    Y INT(4) NOT NULL,\
+    INFO VARCHAR(50),\
+    FOREIGN KEY(PERSON_ID) REFERENCES USER(ID),\
+    PRIMARY KEY(ID)\
+)";
 pool.connect();
 pool.query(base, function(err) {
     
@@ -96,6 +107,14 @@ async.waterfall([
         },
         function(callback) {
             pool.query( commentTable, function(err,result) {
+                if (err.code !== 'ER_TABLE_EXISTS_ERROR')
+                    callback(err);
+                else callback();
+
+            });
+        },
+        function(callback) {
+            pool.query( tipTable, function(err,result) {
                 if (err.code !== 'ER_TABLE_EXISTS_ERROR')
                     callback(err);
                 else callback();

@@ -47,11 +47,12 @@ block content
             img( src="pic/develop.jpg" , no-repeat )
             |发展
 
-
+    
     section#right.well.well-lg
+        
+        #content( name="content" data-toggle="modal" , data-target="#morePics",ondrop="drop(event)",ondragover="dropDown(event)")
 
-        #content( name="content" data-toggle="modal" , data-target="#morePics")
-            img( src="pic/eat.jpg" , alt="showSomePic" , width="100%" , height="100%" )
+            img( src="pic/thanks.png" , alt="showSomePic" , width="100%" , height="100%")
 
         #morePics.modal.fade(tabIndex="-1" , role="dialog" , aria-labelledby="myWordsLabel" , aria-hidden="false")
             .modal-dialog(style="width:60%;height:50%;margin:5% auto;")
@@ -76,6 +77,9 @@ block content
                     label.choose 主页
                 a( href="#" onclick="drawMyImportance()")
                     label.choose 定义重点
+                    
+                img#tip(src="pic/rose.jpg",draggable="true",ondragstart="drag(event)")
+
                 a( href="#" onclick='playVideo()' style="display:none;")
                     label.choose 切换视频
                 
