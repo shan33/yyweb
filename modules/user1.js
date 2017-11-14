@@ -29,7 +29,7 @@ var user = {
     postMessageQueryWithTag: 'INSERT INTO ' + mybase.databases.post +' (POST_USER,TAG,TITLE,CONTENT,TIME) VALUES (?,?,?,?,?)',
     
     getTotalMessageQuery: 'SELECT post.ID,post.POST_USER,post.TITLE,post.CONTENT,post.TIME,user.NAME FROM ' +mybase.databases.post
-                            +' post,' +mybase.databases.user +' user WHERE post.POST_USER=user.id ORDER BY post.ID DESC',
+                            +' post,' +mybase.databases.user +' user WHERE post.POST_USER=user.id AND post.TAG=0 ORDER BY post.ID DESC',
     getTotalMessageQueryWithTag: 'SELECT post.ID,post.POST_USER,post.TITLE,post.CONTENT,post.TIME, post.TAG,user.NAME FROM ' +mybase.databases.post
                             +' post,' +mybase.databases.user +' user WHERE post.POST_USER=user.id AND TAG=?',
     
@@ -38,7 +38,7 @@ var user = {
     //评论
     CommentMessageQuery: 'INSERT INTO ' + mybase.databases.comment +' (SEND_FROM,SEND_TO,POST_ID,COMMIT_CONTENT,TIME) VALUES (?,?,?,?,?)',
     getTotalCommentQuery: 'SELECT com.COMMIT_CONTENT,com.SEND_FROM,user.NAME,com.TIME FROM ' +mybase.databases.comment +' com, '+
-                                           mybase.databases.user + ' user WHERE com.SEND_FROM=user.ID AND POST_ID=(?)',
+                                           mybase.databases.user + ' user WHERE com.SEND_FROM=user.ID AND com.POST_ID=(?)',
     //个人信息
     findUserNameQuery: 'SELECT NAME FROM ' +userTable +' WHERE ID=(?)' ,
     getSelfMessageQuery: 'SELECT com.COMMIT_CONTENT,com.SEND_FROM,com.POST_ID,user.NAME,com.TIME,p.CONTENT FROM ' +mybase.databases.comment +' com, '+

@@ -239,6 +239,7 @@ function sug(){
             success: function (response) {
                 if(response == 1) {
                     alert("发表成功！");
+                    location.reload();
                 } else{
                     alert('请先登录');
                 }

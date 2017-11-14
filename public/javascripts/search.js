@@ -99,7 +99,7 @@ function addInfo(res,obj){
         var response = res[i];
         obj.append("<li><div class='panel panel-default'>" +
                         "<p><b>我</b> 发表了 ---- (&nbsp;&nbsp;<small>" +response.TIME +"</small>)</p><hr>" +
-                            "<p>" +response.CONTENT  +"</p><br>" +
+                            "<p>" +response.TITLE +":  " +response.CONTENT  +"</p><br>" +
                             "<a class='commit'>移动到这里获取评论</a> " +
                             // "<a>获赞</a><small>10</small>" +
                             "<label style='visibility: hidden'>" +response.ID +"</label>" +
@@ -107,7 +107,7 @@ function addInfo(res,obj){
     }
     obj.find('.commit').mouseenter(function(event){
         $.ajax({
-            url: 'http://127.0.0.1:8080/getComments?id=' +$(event.target).next().next().next().html(),
+            url: 'http://127.0.0.1:8080/getComments?id=' +$(event.target).next().html(),
             type: 'get',
             success: function (response) {
                 if(response == 0)

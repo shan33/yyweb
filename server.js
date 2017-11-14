@@ -233,7 +233,7 @@ app.post('/setComments',function(req,res){
 /*获取评论*/
 app.get('/getComments',function(req,res){
     //评论
-    // console.log( "评论 :" +req.query.id) ;
+    console.log( "评论 :" +req.query.id) ;
     async.waterfall([
         //查询
         function(callback){
@@ -242,7 +242,7 @@ app.get('/getComments',function(req,res){
                 if(result == null || result=='' )
                     callback(null, 0) ;
                 else{
-                    console.log(result[0]) ;
+                    // console.log(result[0]) ;
                     callback(null, result ) ;
                 }
             }) ;
@@ -260,23 +260,30 @@ app.get('/getComments',function(req,res){
     }) ;
 }) ;
 
-//获取文化界面具体信息
+//获取文化界面评论信息
 app.get('/spe_info',function(req,res){
-    var info_index = req.query.index ;
-    console.log( speInfo.infoIndex[info_index] );
-    mydatabase.query(user.getTotalMessageQueryWithTag,[(info_index+1)],function (error,result) {
-                if(result == null || result=='' ) {
-                    res.send( {
-                        info: speInfo[(speInfo.infoIndex[info_index])],
-                        talks: ''
-                    }) ;
-                } else{
+    var info_index = parseInt(req.query.index)+1 ;
+    console.log( info_index );
+    async.waterfall([
+        //查询
+        function(callback){
+            mydatabase.query(user.getTotalMessageQueryWithTag,[(info_index)],function (error,result) {
+                 if(result == null || result=='' ) {
+                    callback(null, '') ;
+                 } else {
+                    callback(null, result ) ;
+                 }
+
+            }) ;
+        }
+    ],function(err,result){
+
                     res.send({
                         info: speInfo[(speInfo.infoIndex[info_index])],
                         talks: result
                     });
-                }
-    }) ;
+        }) ;
+   
 }) ;
 
 /*页面跳转*/

@@ -105,7 +105,7 @@ var marryInfo = {
 var language = '土家族语属汉藏语系藏缅语族，其语支的归属至今尚未确定，与彝语较接近，现在讲正宗土家语的主要分布在湘西一些偏远山区的部分土家族人，而在渝东南地区则几乎都被汉化，只有极少偏远地方有讲地道的土家语的。';
 
 var specificInfo = {
-    infoIndex: ['music','dance', 'history', 'girl', 'boy', 'map','eat', 'drink', 'house', 'marry', 'work', 'tatoo', 'communicate'] ,
+    infoIndex: ['','music','dance', 'history', 'girl', 'boy', 'map','eat', 'drink', 'house', 'marry', 'work', 'tatoo', 'communicate'] ,
     comment: comment,
     history: {
         info1: history1,
