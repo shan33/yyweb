@@ -46,7 +46,7 @@ app.get('/',function(req,res){              //主页面
             mydatabase.query( user.findUserQuery, function(err,result){
                 var resu = result.length ;
                 callback(err,resu) ;
-            } ) ;0
+            } ) ;
         }
     ],function(err,personNumber){
         if(err)
